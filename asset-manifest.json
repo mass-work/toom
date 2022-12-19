@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/toom/static/css/main.073c9b0a.css",
+    "main.js": "/toom/static/js/main.2b7a3d96.js",
+    "static/js/787.9883561f.chunk.js": "/toom/static/js/787.9883561f.chunk.js",
+    "static/media/logo.svg": "/toom/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/toom/index.html",
+    "main.073c9b0a.css.map": "/toom/static/css/main.073c9b0a.css.map",
+    "main.2b7a3d96.js.map": "/toom/static/js/main.2b7a3d96.js.map",
+    "787.9883561f.chunk.js.map": "/toom/static/js/787.9883561f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.2b7a3d96.js"
+  ]
+}
