@@ -7,7 +7,7 @@ import StandardFolder from '../02_standard/00_StandardFolder'
 
 const Home = () => {
   return (
-    <StyleHome>Home
+    <StyleHome>
       <CalcFolder />
       <StandardFolder />
     </StyleHome>

@@ -8,12 +8,12 @@ function App() {
   return (
     <StyledApp>
       {/* <Home /> */}
-      <header>header</header>
+      <StyledHeader>header</StyledHeader>
       {/* <Home /> */}
       <Routes>
         <Route path="toom/" element={<Home />} />
       </Routes>
-      <footer>footer</footer>
+      <StyledFooter>footer</StyledFooter>
     </StyledApp>
   );
 }
@@ -21,8 +21,16 @@ function App() {
 export default App;
 
 const StyledApp = styled.div`
-background-color: rgb(20, 20, 25);
-color: rgb(210, 210, 210);
-width: 100%;
-min-height: 100vh;
+  background-color: rgb(20, 20, 25);
+  color: rgb(210, 210, 210);
+  width: 100%;
+
 `;
+
+const StyledHeader = styled.header`
+  background-color: rgb(60, 60, 60);
+`
+const StyledFooter = styled.footer`
+  background-color: rgb(60, 60, 60);
+  min-height: 100vh;
+`
