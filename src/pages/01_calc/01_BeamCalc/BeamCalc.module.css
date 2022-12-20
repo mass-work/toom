@@ -1,0 +1,14 @@
+.app{
+    background-color: rgb(20, 20, 25);
+    color: rgb(210, 210, 210);
+    font-family: "ヒラギノ角ゴ ProN W3"; 
+}
+
+.mainLayout{
+    display: flex;
+    margin-left: 10px;
+}
+
+.subLayout{
+    margin-left: 10px;
+}

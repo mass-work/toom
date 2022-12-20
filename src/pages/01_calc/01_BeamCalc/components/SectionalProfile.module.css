@@ -1,0 +1,57 @@
+.section{
+    width: 345px;
+    height: 265px;
+    padding: 5px 5px 5px 5px;
+}
+
+.sectionInput[type=radio]+label:before{
+    content: "";
+    display: inline-block;
+    background-size: contain;
+    margin: 5px 5px 5px 5px;
+    width: 75px;
+    height: 75px;
+}
+
+.sectionInput[type=radio]:checked+label::before{
+    border: 2px solid rgb(200, 200, 100);
+    box-sizing: border-box;
+}
+
+.sectionInput[type=radio]{
+    display: none;
+} 
+
+.sectionInput[type=radio][id="101"]+label:before{
+	background-image: url(./img/101.png);
+}
+.sectionInput[type=radio][id="102"]+label:before{
+	background-image: url(./img/102.png);
+}
+.sectionInput[type=radio][id="103"]+label:before{
+	background-image: url(./img/103.png);
+}
+.sectionInput[type=radio][id="104"]+label:before{
+	background-image: url(./img/104.png);
+}
+.sectionInput[type=radio][id="105"]+label:before{
+	background-image: url(./img/105.png);
+}
+.sectionInput[type=radio][id="106"]+label:before{
+	background-image: url(./img/106.png);
+}
+.sectionInput[type=radio][id="107"]+label:before{
+	background-image: url(./img/107.png);
+}
+.sectionInput[type=radio][id="108"]+label:before{
+	background-image: url(./img/108.png);
+}
+.sectionInput[type=radio][id="109"]+label:before{
+	background-image: url(./img/109.png);
+}
+.sectionInput[type=radio][id="110"]+label:before{
+	background-image: url(./img/110.png);
+}
+.sectionInput[type=radio][id="111"]+label:before{
+	background-image: url(./img/111.png);
+}

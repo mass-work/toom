@@ -1,0 +1,57 @@
+.sLInput01 {
+    width: 300px;
+    height: 180px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: relative;
+    /* border: 2px solid rgb(200, 200, 100); */
+    text-align: center;
+    margin-left: 5px;
+};
+
+.sLimg{
+    width: 100%;
+    height: 100%;
+}
+
+.input{
+    font-size: 12px;
+    text-align: right;
+    width: 30px;
+    height: 15px;
+    border: none;
+    outline: none;
+}
+
+.input[type="number"]::-webkit-outer-spin-button,
+.input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.input[type="number"] {
+  -moz-appearance:textfield;
+}
+
+
+.l{
+    font-size: 10px;
+    padding-left: 2px;
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    position: absolute;
+    left: 42%;
+    top: 8%;
+}
+.p{
+    font-size: 10px;
+    padding-left: 2px;
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    position: absolute;
+    left: 80%;
+    top: 15%;
+}
+
+

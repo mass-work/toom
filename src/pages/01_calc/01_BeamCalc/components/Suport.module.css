@@ -1,0 +1,32 @@
+.suport{
+    width: 330px;
+    height: 85px;
+    padding: 5px 5px 5px 5px;
+}
+.suportInput[type=radio]+label:before{
+    content: "";
+    display: inline-block;
+    background-size: contain;
+    margin: 5px 5px 5px 5px;
+    width: 100px;
+    height: 85px;
+}
+
+.suportInput[type=radio]:checked+label::before{
+    border: 2px solid rgb(200, 200, 100);
+    box-sizing: border-box;
+}
+
+.suportInput[type=radio]{
+    display: none;
+} 
+
+.suportInput[type=radio][id="01"]+label:before{
+	background-image: url(./img/1.png);
+}
+.suportInput[type=radio][id="02"]+label:before{
+	background-image: url(./img/2.png);
+}
+.suportInput[type=radio][id="03"]+label:before{
+	background-image: url(./img/3.png);
+}

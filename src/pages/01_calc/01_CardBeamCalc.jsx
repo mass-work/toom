@@ -1,12 +1,13 @@
 import React from 'react'
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { Card, CardMedia, CardActionArea, CardContent, Typography  } from "@mui/material";
 import test from "./img/test.png"
 
 const CardBeamCalc = () => {
   return (
     <div>
-      <A href="https://mass-work.github.io/002_beamcalc/" target="_blank" rel="noopener noreferrer">
+      <Link to={`beamcalc/`}>
         <OverCard>
           <OverCardActionArea>
             <OverCardMedia component="img" height="140" image={test} alt="card01"/>
@@ -18,7 +19,7 @@ const CardBeamCalc = () => {
               </OverCardContent>
           </OverCardActionArea>
         </OverCard>
-      </A>
+      </Link>
     </div>
   )
 }
@@ -44,7 +45,4 @@ const OverCardContent = styled(CardContent)`
 `
 const OverTypography = styled(Typography)`
   
-`
-const A = styled.a`
-  text-decoration:none
 `

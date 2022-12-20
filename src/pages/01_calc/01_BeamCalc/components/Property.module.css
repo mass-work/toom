@@ -1,0 +1,39 @@
+.property{
+    width: 300px;
+    height: 95px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: relative;
+    /* border: 2px solid rgb(200, 200, 100); */
+    margin-left: 5px;
+    display:block;
+}
+
+.unit{
+    position: absolute;
+    left: 50%;
+}
+
+.inputBox[type="number"]::-webkit-outer-spin-button,
+.inputBox[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.inputBox[type="number"] {
+  -moz-appearance:textfield;
+}
+
+.inputBox{
+    font-size: 12px;
+    width: 40px;
+    height: 15px;
+    position: absolute;
+    left: 30%;
+}
+.selectBox{
+    width: 120px;
+    height: 22px;
+    position: absolute;
+    left: 30%;
+}
+
