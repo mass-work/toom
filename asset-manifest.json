@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/toom/static/css/main.31d6cfe0.css",
-    "main.js": "/toom/static/js/main.22fcc2ca.js",
+    "main.js": "/toom/static/js/main.a399483d.js",
     "index.html": "/toom/index.html",
-    "main.22fcc2ca.js.map": "/toom/static/js/main.22fcc2ca.js.map"
+    "main.a399483d.js.map": "/toom/static/js/main.a399483d.js.map"
   },
   "entrypoints": [
     "static/css/main.31d6cfe0.css",
-    "static/js/main.22fcc2ca.js"
+    "static/js/main.a399483d.js"
   ]
 }
