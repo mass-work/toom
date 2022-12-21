@@ -16,6 +16,5 @@ const Home = () => {
 export default Home;
 
 const StyleHome = styled.div`
-  background-color: rgb(20, 20, 25);
 `;
 

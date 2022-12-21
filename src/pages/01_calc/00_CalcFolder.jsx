@@ -1,23 +1,18 @@
 import React, { useState }  from 'react'
 import styled from "styled-components";
-import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined';
-import DesktopWindowsIcon from '@mui/icons-material/DesktopWindows';
-import BallotIcon from '@mui/icons-material/Ballot';
+import CalculateIcon from '@mui/icons-material/Calculate';
 import {Grid} from '@mui/material';
 import Modal from '../../common/components/Modal';
 import CardBeamCalc from './01_CardBeamCalc';
-
 
 const CalcFolder = () => {
   const [show, setShow] = useState(false);
   return (
     <div>
       <FolderBotton onClick={() => setShow(true)}>
-        <StyledFolder>計算
-          <DesktopWindowsIcon />
-          <BallotIcon />
+        <StyledFolder>計算<br></br>Calculator
         <p>
-          <MenuBookOutlinedIcon  style={{display:"flex", fontSize: "200px", alignItems: "center", justifyContent: "center" }}/>
+          <CalculateIcon  style={{display:"flex", fontSize: "200px", alignItems: "center", justifyContent: "center" }}/>
         </p>
         </StyledFolder>
       </FolderBotton>

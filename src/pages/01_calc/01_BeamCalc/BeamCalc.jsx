@@ -128,6 +128,7 @@ const StyledBeamCalc = styled.div`
   background-color: rgb(20, 20, 25);
   color: rgb(210, 210, 210);
   font-family: "ヒラギノ角ゴ ProN W3"; 
+  width: 100%;
 `
 const StyledMainLayout = styled.div`
   display: flex;

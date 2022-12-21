@@ -1,23 +1,19 @@
 import React, { useState }  from 'react'
 import styled from "styled-components";
 import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined';
-import DesktopWindowsIcon from '@mui/icons-material/DesktopWindows';
-import BallotIcon from '@mui/icons-material/Ballot';
 import {Grid} from '@mui/material';
 import Modal from '../../common/components/Modal';
 // import CardBeamCalc from './01_CardBeamCalc';
 
 
-const CalcFolder = () => {
+const StandardFolder = () => {
   const [show, setShow] = useState(false);
   return (
     <div>
       <FolderBotton onClick={() => setShow(true)}>
-        <StyledFolder>規格
-          <DesktopWindowsIcon />
-          <BallotIcon />
+        <StyledFolder>規格<br></br>Standard
         <p>
-          <MenuBookOutlinedIcon  style={{display:"flex", fontSize: "200px", alignItems: "center", justifyContent: "center" }}/>
+          <MenuBookOutlinedIcon style={{display:"flex", fontSize: "200px", alignItems: "center", justifyContent: "center" }}/>
         </p>
         </StyledFolder>
       </FolderBotton>
@@ -34,7 +30,7 @@ const CalcFolder = () => {
     </div>
   )
 }
-export default CalcFolder
+export default StandardFolder
 
 const StyledFolder = styled.div`
   background-color: rgb(40, 40, 40);

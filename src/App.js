@@ -6,16 +6,18 @@ import Home from './pages/00_home/Home';
 import BeamCalc from './pages/01_calc/01_BeamCalc/BeamCalc'
 import HomeIcon from '@mui/icons-material/Home';
 
+
 function App() {
   return (
     <StyledApp>
-      <StyledHeader>StyledHeader
-        <Link to={`/toom/`}><HomeIcon /></Link>
+      <StyledHeader>
+        TooM -Toolbox for Manufacturing-
+        <Link to={`/toom/`}><HomeIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
       </StyledHeader>
-      <Routes>
-        <Route path="/toom/" element={<Home />} />
-        <Route path="/toom/beamcalc/" element={<BeamCalc />} />
-      </Routes>
+        <Routes>
+          <Route path="/toom/" element={<Home />} />
+          <Route path="/toom/beamcalc/" element={<BeamCalc />} />
+        </Routes>
       <StyledFooter>footer</StyledFooter>
     </StyledApp>
   );
@@ -24,15 +26,17 @@ function App() {
 export default App;
 
 const StyledApp = styled.div`
-  background-color: rgb(20, 20, 25);
   color: rgb(210, 210, 210);
-  width: 100%;
+  /* width: 500px;
+  height: 10vh; */
 `;
-
 const StyledHeader = styled.header`
   background-color: rgb(60, 60, 60);
+  margin: -500% -500% 0% -500%;
+  padding: 500% 500% 0% 500%;
 `
 const StyledFooter = styled.footer`
   background-color: rgb(60, 60, 60);
-  min-height: 100vh;
+  margin: 0% -500% -100% -500%;
+  padding: 0% 500% 100% 500%;
 `
