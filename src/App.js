@@ -29,14 +29,17 @@ const StyledApp = styled.div`
   color: rgb(210, 210, 210);
   /* width: 500px;
   height: 10vh; */
+  @media screen and (max-width: 960px) {
+    color: rgb(210, 210, 210);
+  }
 `;
 const StyledHeader = styled.header`
   background-color: rgb(60, 60, 60);
-  margin: -500% -500% 0% -500%;
-  padding: 500% 500% 0% 500%;
+  margin: -10% -10% 0% -10%;
+  padding: 10% 10% 0% 10%;
 `
 const StyledFooter = styled.footer`
   background-color: rgb(60, 60, 60);
-  margin: 0% -500% -100% -500%;
-  padding: 0% 500% 100% 500%;
+  margin: 0% -10% -100% -10%;
+  padding: 0% 10% 100% 10%;
 `
