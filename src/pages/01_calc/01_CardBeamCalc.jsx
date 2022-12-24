@@ -32,12 +32,9 @@ const OverCard = styled(Card)`
   max-width: 300px;
   min-width: 50px;
   text-align: center;
-  /* max-height: 300px;
-  min-height: 100px; */
   &:hover{background: rgba(255, 255, 255, 0.8);}
 `
 const OverCardMedia = styled(CardMedia)`
-  /* margin-bottom: 20%; */
   height: 80%;
 `
 const OverCardActionArea = styled(CardActionArea)`

@@ -43,16 +43,11 @@ const StyledModalWindow = styled.div`
   min-width: 600px;
   background-color:rgba(60,60,60,1);
   overflow-y: scroll;
-  /*　画面の中央に要素を表示させる設定　*/
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
 `
 const NewCancelPresentationIcon = styled(CancelPresentationIcon)`
 &:hover{
     color: rgb(20, 20, 20);
 `
-
 const CloseBotton = styled.button`
   position:absolute;
   top: 0%;

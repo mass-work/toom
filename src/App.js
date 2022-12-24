@@ -39,9 +39,18 @@ const StyledHeader = styled.header`
   background-color: rgb(60, 60, 60);
   margin: -10% 0% 0% 0%;
   padding: 10% 0% 0% 0%;
+  @media screen and (max-width: 960px) {
+  }
+  @media screen and (max-width: 760px) {
+  }
 `
 const StyledFooter = styled.footer`
   background-color: rgb(60, 60, 60);
   margin: 0% 0% -100% 0%;
   padding: 0% 0% 100% 0%;
+  @media screen and (max-width: 960px) {
+  }
+  @media screen and (max-width: 760px) {
+    font-size: 9px;
+  }
 `

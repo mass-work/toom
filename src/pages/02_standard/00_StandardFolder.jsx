@@ -3,7 +3,13 @@ import styled from "styled-components";
 import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined';
 import {Grid} from '@mui/material';
 import Modal from '../../common/components/Modal';
-// import CardBeamCalc from './01_CardBeamCalc';
+
+import TerminalIcon from '@mui/icons-material/Terminal';
+import PrecisionManufacturingIcon from '@mui/icons-material/PrecisionManufacturing';
+import ScaleIcon from '@mui/icons-material/Scale';
+import PushPinIcon from '@mui/icons-material/PushPin';
+import ComputerIcon from '@mui/icons-material/Computer';
+
 
 const StandardFolder = () => {
   const [show, setShow] = useState(false);
@@ -12,7 +18,12 @@ const StandardFolder = () => {
       <FolderBotton onClick={() => setShow(true)}>
         <StyledFolder>規格<br></br>Standard
         <p>
-          <OverMenuBookOutlinedIcon />
+          <OverMenuBookOutlinedIcon />規格<br></br>
+          <TerminalIcon />プログラミング<br></br>
+          <PrecisionManufacturingIcon />機械設計<br></br>
+          <ComputerIcon />CAD<br></br>
+          <ScaleIcon />測定<br></br>
+          <PushPinIcon />機械加工<br></br>
           {/* <MenuBookOutlinedIcon style={{display:"flex", fontSize: "300px", alignItems: "center", justifyContent: "center"}}/> */}
         </p>
         </StyledFolder>

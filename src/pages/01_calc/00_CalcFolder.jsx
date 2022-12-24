@@ -25,7 +25,6 @@ const CalcFolder = () => {
               <FolderCardBeamCalc><CardBeamCalc/></FolderCardBeamCalc>
               <FolderCardBeamCalc><CardBeamCalc/></FolderCardBeamCalc>
               <FolderCardBeamCalc><CardBeamCalc/></FolderCardBeamCalc>
-              <FolderCardBeamCalc><CardBeamCalc/></FolderCardBeamCalc>
             </FolderGrid>
           </StyledFolder>
         </FolderBotton>
@@ -35,9 +34,6 @@ const CalcFolder = () => {
         {/* <p>Childrenを使っています。</p> */}
         <ModalTitle>   計算</ModalTitle>
         <ModalGrid container spacing={5} padding={5}>
-          <Grid item xs={4}><CardBeamCalc/></Grid>
-          <Grid item xs={4}><CardBeamCalc/></Grid>
-          <Grid item xs={4}><CardBeamCalc/></Grid>
           <Grid item xs={4}><CardBeamCalc/></Grid>
         </ModalGrid>
       </OverModal>
@@ -51,6 +47,16 @@ const StyledCalcFolder = styled.div`
   min-width: 120px;
   padding: 0%;
   margin: 0%;
+  @media screen and (max-width: 960px) {
+
+  }
+  @media screen and (max-width: 760px) {
+    max-width: 760px;
+    min-width: 150px;
+    position:fixed;
+    left:10%;
+    width:80%;
+  }
 `
 const FolderBotton = styled.button`
   border: none;
@@ -89,12 +95,10 @@ const FolderGrid = styled.div`
   flex-wrap: wrap;
   width: 100%;
   max-height: 200px;
-  /* min-height: 100px; */
   overflow-y: scroll;
 `
 const FolderCardBeamCalc = styled.div`
   width: 46%;
-  /* height: auto; */
   margin: 2%;
   padding: 0%;
   overflow: hidden;
