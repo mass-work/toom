@@ -25,6 +25,7 @@ const Modal = ({ show, setShow, children }) => {
 
 export default Modal;
 const StyledOverlay = styled.div`
+  z-index: 10;
   position:fixed;
   top:0;
   left:0;
@@ -39,6 +40,7 @@ const StyledModalWindow = styled.div`
   width:80%;
   height:80%;
   max-width: 1000px;
+  min-width: 600px;
   background-color:rgba(60,60,60,1);
   overflow-y: scroll;
   /*　画面の中央に要素を表示させる設定　*/
@@ -53,8 +55,8 @@ const NewCancelPresentationIcon = styled(CancelPresentationIcon)`
 
 const CloseBotton = styled.button`
   position:absolute;
-  top: 1%;
-  right: 1%;
+  top: 0%;
+  right: 0%;
   color: rgb(210, 210, 210);
   border: none;
   background: transparent;

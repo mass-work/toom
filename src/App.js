@@ -27,6 +27,8 @@ export default App;
 
 const StyledApp = styled.div`
   color: rgb(210, 210, 210);
+  margin: 0%;
+  padding: 0%;
   /* width: 500px;
   height: 10vh; */
   @media screen and (max-width: 960px) {
@@ -35,11 +37,11 @@ const StyledApp = styled.div`
 `;
 const StyledHeader = styled.header`
   background-color: rgb(60, 60, 60);
-  margin: -10% -10% 0% -10%;
-  padding: 10% 10% 0% 10%;
+  margin: -10% 0% 0% 0%;
+  padding: 10% 0% 0% 0%;
 `
 const StyledFooter = styled.footer`
   background-color: rgb(60, 60, 60);
-  margin: 0% -10% -100% -10%;
-  padding: 0% 10% 100% 10%;
+  margin: 0% 0% -100% 0%;
+  padding: 0% 0% 100% 0%;
 `
