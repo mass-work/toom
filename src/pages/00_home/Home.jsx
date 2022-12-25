@@ -1,11 +1,15 @@
 import React  from 'react'
 import styled from "styled-components";
 import CalcFolder from '../01_calc/00_CalcFolder'
-import StandardFolder from '../02_standard/00_StandardFolder'
+// import StandardFolder from '../02_standard/00_StandardFolder'
 
 const Home = () => {
   return (
     <StyleHome>
+      <StyleHomecontents><CalcFolder /></StyleHomecontents>
+      <StyleHomecontents><CalcFolder /></StyleHomecontents>
+      <StyleHomecontents><CalcFolder /></StyleHomecontents>
+      <StyleHomecontents><CalcFolder /></StyleHomecontents>
       <StyleHomecontents><CalcFolder /></StyleHomecontents>
       <StyleHomecontents><CalcFolder /></StyleHomecontents>
       <StyleHomecontents><CalcFolder /></StyleHomecontents>
@@ -16,7 +20,7 @@ const Home = () => {
 export default Home;
 const StyleHome = styled.div`
   /* background-color: rgb(20, 20, 20); */
-  background-color: red;
+  /* background-color: red; */
   margin: 0% auto 0% auto;
   width: 90%;
   max-width: 1350px;
@@ -28,11 +32,18 @@ const StyleHome = styled.div`
   }
   @media screen and (max-width: 760px) {
     max-width: 740px;
-    display: block;
+    flex-direction: column;
   }
 `
 const StyleHomecontents = styled.div`
-  margin: 5% 2% 0% 5%;
+  border-radius: 5px;
+  margin: 2% 2% 5% 5%;
   width: 25%;
   height: auto;
+  @media screen and (max-width: 760px) {
+    /* background-color: yellow; */
+    margin: 2% 0% 0% 0%;
+    padding: 0% 0% 0% 0%;
+    width: 100%;
+  }
 `

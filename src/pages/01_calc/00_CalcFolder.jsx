@@ -7,6 +7,16 @@ import CardBeamCalc from './01_CardBeamCalc';
 
 const CalcFolder = () => {
   const [show, setShow] = useState(false);
+  const sw = window.screen.width;
+  let division = 6
+  const gridDivision = () => {
+  if (sw > 760){
+    division = 4
+  }else{
+    division = 12
+  }
+  return division
+  }
   return (
     <div>
       <StyledCalcFolder>
@@ -33,9 +43,16 @@ const CalcFolder = () => {
       <OverModal show={show} setShow={setShow}>
         {/* <p>Childrenを使っています。</p> */}
         <ModalTitle>   計算</ModalTitle>
-        <ModalGrid container spacing={5} padding={5}>
-          <Grid item xs={4}><CardBeamCalc/></Grid>
-        </ModalGrid>
+          <ModalGrid container spacing={5} padding={5}>
+          <Grid item xs={gridDivision()}><CardBeamCalc/></Grid>
+          <Grid item xs={gridDivision()}><CardBeamCalc/></Grid>
+          <Grid item xs={gridDivision()}><CardBeamCalc/></Grid>
+          <Grid item xs={gridDivision()}><CardBeamCalc/></Grid>
+          <Grid item xs={gridDivision()}><CardBeamCalc/></Grid>
+          <Grid item xs={gridDivision()}><CardBeamCalc/></Grid>
+          <Grid item xs={gridDivision()}><CardBeamCalc/></Grid>
+          <Grid item xs={gridDivision()}><CardBeamCalc/></Grid>
+          </ModalGrid>
       </OverModal>
 
     </div>
@@ -43,19 +60,14 @@ const CalcFolder = () => {
 }
 export default CalcFolder
 const StyledCalcFolder = styled.div`
+
   max-width: 350px;
   min-width: 120px;
   padding: 0%;
   margin: 0%;
-  @media screen and (max-width: 960px) {
-
-  }
   @media screen and (max-width: 760px) {
-    max-width: 760px;
-    min-width: 150px;
-    position:fixed;
-    left:10%;
-    width:80%;
+    /* background-color: blue; */
+    margin: 2% 3% 12% 3%;
   }
 `
 const FolderBotton = styled.button`
@@ -67,10 +79,12 @@ const FolderBotton = styled.button`
   height: 100%;
 `
 const StyledFolder = styled.div`
+  border-radius: 15px;
   background-color: rgb(40, 40, 40);
+  /* background-color: blue; */
   color: rgb(200, 200, 200);
-  margin: 0% 0% -10% 0%;
-  padding: 0%;
+  margin: 0% 0% -8% 0%;
+  padding: 0% 0% 2% 0%;
   &:hover{
     background: rgb(60, 60, 60);
 }
@@ -96,6 +110,19 @@ const FolderGrid = styled.div`
   width: 100%;
   max-height: 200px;
   overflow-y: scroll;
+  &::-webkit-scrollbar {
+  width: 8px;
+  height: 20px;
+  }
+  &::-webkit-scrollbar-track {
+  background-color: rgba(80, 80, 80, 0.3);
+  border-radius: 100px;
+  }
+  &::-webkit-scrollbar-thumb {
+  background: rgba(100, 100, 100, 0.5);
+  border-radius: 100px;
+  width: 130px;
+  }
 `
 const FolderCardBeamCalc = styled.div`
   width: 46%;
@@ -103,7 +130,7 @@ const FolderCardBeamCalc = styled.div`
   padding: 0%;
   overflow: hidden;
   aspect-ratio: 5 / 3.4;
-  border-radius: 5px;
+  border-radius: 10px;
 `
 const OverModal = styled(Modal)`
   display: flex;

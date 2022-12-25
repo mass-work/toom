@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
-import CancelPresentationIcon from '@mui/icons-material/CancelPresentation';
+import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 
 const Modal = ({ show, setShow, children }) => {
   const closeModal = () => {
@@ -13,7 +13,7 @@ const Modal = ({ show, setShow, children }) => {
         <StyledModalWindow>
           <div id="content" onClick={(e) => e.stopPropagation()}>
             {children}
-            <CloseBotton onClick={closeModal}><NewCancelPresentationIcon fontSize="large"/></CloseBotton>
+            <CloseBotton onClick={closeModal}><NewCancelIcon fontSize="large"/></CloseBotton>
           </div>
         </StyledModalWindow>
       </StyledOverlay>
@@ -32,6 +32,7 @@ const StyledOverlay = styled.div`
   width:100%;
   height:100%;
   background-color:rgba(20, 20, 20, 0.3);
+  
 `
 const StyledModalWindow = styled.div`
   position:fixed;
@@ -40,13 +41,29 @@ const StyledModalWindow = styled.div`
   width:80%;
   height:80%;
   max-width: 1000px;
-  min-width: 600px;
+  min-width: 300px;
   background-color:rgba(60,60,60,1);
+  border-radius: 10px;
   overflow-y: scroll;
+  &::-webkit-scrollbar {
+  width: 20px;
+  height: 10px;
+  padding: 20% 0% 20% 0%;
+  margin: 20% 0% 20% 0%;
+  }
+  &::-webkit-scrollbar-track {
+  background-color: rgba(60, 60, 60, 0.3);
+  border-radius: 100px;
+  }
+  &::-webkit-scrollbar-thumb {
+  background: rgba(100, 100, 100, 0.5);
+  border-radius: 100px;
+  width: 130px;
+  }
 `
-const NewCancelPresentationIcon = styled(CancelPresentationIcon)`
+const NewCancelIcon = styled(ClearRoundedIcon)`
 &:hover{
-    color: rgb(20, 20, 20);
+    color: rgb(120, 120, 120);
 `
 const CloseBotton = styled.button`
   position:absolute;
