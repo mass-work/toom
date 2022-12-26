@@ -1,15 +1,16 @@
 {
   "files": {
     "main.css": "/toom/static/css/main.9a407a4f.css",
-    "main.js": "/toom/static/js/main.95c2c5ec.js",
+    "main.js": "/toom/static/js/main.2fe98209.js",
     "static/js/787.9883561f.chunk.js": "/toom/static/js/787.9883561f.chunk.js",
+    "static/media/Nut.png": "/toom/static/media/Nut.6fbee2ff02aeacf7bdb1.png",
     "index.html": "/toom/index.html",
     "main.9a407a4f.css.map": "/toom/static/css/main.9a407a4f.css.map",
-    "main.95c2c5ec.js.map": "/toom/static/js/main.95c2c5ec.js.map",
+    "main.2fe98209.js.map": "/toom/static/js/main.2fe98209.js.map",
     "787.9883561f.chunk.js.map": "/toom/static/js/787.9883561f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9a407a4f.css",
-    "static/js/main.95c2c5ec.js"
+    "static/js/main.2fe98209.js"
   ]
 }
