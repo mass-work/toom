@@ -2,9 +2,9 @@ import React from 'react'
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Card, CardMedia, CardActionArea, CardContent } from "@mui/material";
-import img from "./img/beamCalc.png"
+import img from "./img/Nut.png"
 
-const CardBeamCalc = () => {
+const CardNut = () => {
 
   return (
     <div>
@@ -22,7 +22,7 @@ const CardBeamCalc = () => {
     </div>
   )
 }
-export default CardBeamCalc
+export default CardNut
 
 const OverCard = styled(Card)`
   background-color:rgba(60,60,60,1);

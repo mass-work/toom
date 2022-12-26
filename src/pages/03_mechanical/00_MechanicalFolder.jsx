@@ -1,11 +1,11 @@
 import React, { useState }  from 'react'
 import styled from "styled-components";
-import CalculateIcon from '@mui/icons-material/Calculate';
+import DesignServicesIcon from '@mui/icons-material/DesignServices';
 import {Grid} from '@mui/material';
 import Modal from '../../common/components/Modal';
-import CardBeamCalc from './01_CardBeamCalc';
+import CardBeamCalc from '../01_calc/01_CardBeamCalc';
 
-const CalcFolder = () => {
+const MechanicalFolder = () => {
   const [show, setShow] = useState(false);
   const sw = window.screen.width;
   let division = 6
@@ -23,42 +23,31 @@ const CalcFolder = () => {
         <FolderBotton onClick={() => setShow(true)}>
           <StyledFolder>
             <StyledIcon>
-              <CalculateIcon style={{float:"right", fontSize: "35px"}}/>
+              <DesignServicesIcon style={{float:"right", fontSize: "35px"}}/>
             </StyledIcon>
             <StyledTitle>
-              計算<br></br>Calculator
+              機械設計<br></br>Mechanical
             </StyledTitle>
             <FolderGrid>
-              <FolderCard><CardBeamCalc/></FolderCard>
-              <FolderCard><CardBeamCalc/></FolderCard>
-              <FolderCard><CardBeamCalc/></FolderCard>
-              <FolderCard><CardBeamCalc/></FolderCard>
-              <FolderCard><CardBeamCalc/></FolderCard>
-              <FolderCard><CardBeamCalc/></FolderCard>
+              <FolderCard>一般公差</FolderCard>
+
             </FolderGrid>
           </StyledFolder>
         </FolderBotton>
       </StyledCalcFolder>
-
       <OverModal show={show} setShow={setShow}>
         {/* <p>Childrenを使っています。</p> */}
         <ModalTitle>   計算</ModalTitle>
           <ModalGrid container spacing={5} padding={5}>
           <Grid item xs={gridDivision()}><CardBeamCalc/></Grid>
-          <Grid item xs={gridDivision()}><CardBeamCalc/></Grid>
-          <Grid item xs={gridDivision()}><CardBeamCalc/></Grid>
-          <Grid item xs={gridDivision()}><CardBeamCalc/></Grid>
-          <Grid item xs={gridDivision()}><CardBeamCalc/></Grid>
-          <Grid item xs={gridDivision()}><CardBeamCalc/></Grid>
-          <Grid item xs={gridDivision()}><CardBeamCalc/></Grid>
-          <Grid item xs={gridDivision()}><CardBeamCalc/></Grid>
+
           </ModalGrid>
       </OverModal>
 
     </div>
   )
 }
-export default CalcFolder
+export default MechanicalFolder
 
 const StyledCalcFolder = styled.div`
   max-width: 350px;

@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from './pages/00_home/Home';
 import BeamCalc from './pages/01_calc/01_BeamCalc/BeamCalc'
 import HomeIcon from '@mui/icons-material/Home';
+import Nut from './pages/02_elements/02_Nut/Nut';
 
 
 function App() {
@@ -17,6 +18,8 @@ function App() {
         <Routes>
           <Route path="/toom/" element={<Home />} />
           <Route path="/toom/beamcalc/" element={<BeamCalc />} />
+
+          <Route path="/toom/elements/nut/" element={<Nut />} />
         </Routes>
       <StyledFooter>footer</StyledFooter>
     </StyledApp>
