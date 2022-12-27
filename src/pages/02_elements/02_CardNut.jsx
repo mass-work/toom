@@ -8,13 +8,13 @@ const CardNut = () => {
 
   return (
     <div>
-      <Link to={`beamcalc/`}>
+      <Link to={`elements/nut/`}>
         <OverCard>
           <OverCardActionArea>
             <OverCardMedia component="img" height="140" image={img} alt="card01"/>
               <OverCardContent>
-                  梁(はり)の計算ツール <br/>
-                  Beam Calculator
+                  溶接ナット <br/>
+                  Weld Nut
               </OverCardContent>
           </OverCardActionArea>
         </OverCard>

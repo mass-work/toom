@@ -1,9 +1,8 @@
 import React, { useState }  from 'react'
 import styled from "styled-components";
-import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined';
+import SettingsIcon from '@mui/icons-material/Settings';
 import {Grid} from '@mui/material';
 import Modal from '../../common/components/Modal';
-import CardBeamCalc from '../01_calc/01_CardBeamCalc';
 import CardNut from './02_CardNut';
 
 const ElementsFolder = () => {
@@ -24,7 +23,7 @@ const ElementsFolder = () => {
         <FolderBotton onClick={() => setShow(true)}>
           <StyledFolder>
             <StyledIcon>
-              <MenuBookOutlinedIcon style={{float:"right", fontSize: "35px"}}/>
+              <SettingsIcon style={{float:"right", fontSize: "35px"}}/>
             </StyledIcon>
             <StyledTitle>
               要素部品<br></br>Elements
@@ -43,7 +42,7 @@ const ElementsFolder = () => {
         {/* <p>Childrenを使っています。</p> */}
         <ModalTitle>   計算</ModalTitle>
           <ModalGrid container spacing={5} padding={5}>
-          <Grid item xs={gridDivision()}><CardBeamCalc/></Grid>
+          <Grid item xs={gridDivision()}><CardNut/></Grid>
 
           </ModalGrid>
       </OverModal>
