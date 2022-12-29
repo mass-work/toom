@@ -6,6 +6,7 @@ import Home from './pages/00_home/Home';
 import BeamCalc from './pages/01_calc/01_BeamCalc/BeamCalc'
 import HomeIcon from '@mui/icons-material/Home';
 import Nut from './pages/02_elements/02_Nut/Nut';
+import Fft from './pages/05_mesure/01_fft/Fft';
 
 
 function App() {
@@ -14,12 +15,14 @@ function App() {
       <StyledHeader>
         TooM -Toolbox for Manufacturing-
         <Link to={`/toom/`}><HomeIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
+        <Link to={`/toom/mesure/fft/`}><HomeIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
       </StyledHeader>
         <Routes>
           <Route path="/toom/" element={<Home />} />
           <Route path="/toom/beamcalc/" element={<BeamCalc />} />
 
           <Route path="/toom/elements/nut/" element={<Nut />} />
+          <Route path="/toom/mesure/fft/" element={<Fft />} />
         </Routes>
       <StyledFooter>footer</StyledFooter>
     </StyledApp>
