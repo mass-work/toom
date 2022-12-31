@@ -7,31 +7,60 @@ const MotionRec = () => {
   const [accelerationZ, setAccelerationZ] = useState(0);
 
   const deviceMotionRequest = () => {
-    if (DeviceMotionEvent.requestPermission) {
-      DeviceMotionEvent.requestPermission()
-        .then(permissionState => {
-          if (permissionState === 'granted') {
-            window.addEventListener("devicemotion", (event) => {
-              if (!event.accelerationIncludingGravity) {
-                alert('event.accelerationIncludingGravity is null');
-                return;
-              }
-
-            })
-          }
-        })
-        .catch(console.error);
-    } else {
-      alert('DeviceMotionEvent.requestPermission is not found')
+    // osを確認
+    function detectOSSimply() {
+      let ret;
+      if (
+          navigator.userAgent.indexOf("iPhone") > 0 ||
+          navigator.userAgent.indexOf("iPad") > 0 ||
+          navigator.userAgent.indexOf("iPod") > 0
+      ) {
+          ret = "iphone";   // iPad OS13のsafariはデフォルト「Macintosh」なので別途要対応
+      } else if (navigator.userAgent.indexOf("Android") > 0) {
+          ret = "android";
+      } else {
+          ret = "pc";
+      }
+      return ret;
+    }
+    const os = detectOSSimply();
+    if (os === "iphone") {
+      // osがiosの場合にセンサーにアクセス
+      if (DeviceMotionEvent.requestPermission) {
+        DeviceMotionEvent.requestPermission()
+          .then(permissionState => {
+            if (permissionState === 'granted') {
+              window.addEventListener("devicemotion", (event) => {
+                if (!event.accelerationIncludingGravity) {
+                  alert('event.accelerationIncludingGravity is null');
+                  return;
+                }
+                setAccelerationX(event.accelerationIncludingGravity.x)
+                setAccelerationY(event.accelerationIncludingGravity.y)
+                setAccelerationZ(event.accelerationIncludingGravity.z)
+              })
+            }
+          })
+          .catch(console.error);
+      } else {
+        alert('DeviceMotionEvent.requestPermission is not found')
+      }
+    } else if (os === "android") {
+        window.alert("android未対応")
+    } else{
+        window.alert("PC未対応");
     }
   }
-  
-  const getMotion = (event) => {
-    setAccelerationX(event.accelerationIncludingGravity.x)
-    setAccelerationY(event.accelerationIncludingGravity.y)
-    setAccelerationZ(event.accelerationIncludingGravity.z)
-  }
-  
+
+  // const sleep = async() => {
+  //     const date = new Date()
+  //     console.log(date.getUTCMilliseconds())
+  //     await new Promise(s => setTimeout(s, 200))
+  //     console.log(date.getUTCMilliseconds())
+  //   }
+  // sleep()
+
+
   return (
     <div>MotionRec
       <input type="button" id="permit" value="SafariでDeviceOrientationを許可"/>
@@ -42,7 +71,6 @@ const MotionRec = () => {
         
       </div>
       <button onClick={deviceMotionRequest}>A</button>
-      <button onClick={getMotion}>B</button>
       <div>{accelerationX}</div>
       <div>{accelerationY}</div>
       <div>{accelerationZ}</div>
@@ -63,17 +91,3 @@ const Chart3Canvas = styled.canvas`
   width: 500px;
   height: 250px;
 `
-
-// html, body{
-//   text-align: center;
-//   background-color: #fafafa;
-//   font-size: 20px;
-//   color: #333;
-// }
-// body{
-//   background-color: #ffffcc;
-// }
-// #mycanvas{
-//   border: 1px solid #333;
-//   background-color: #ffcccc;
-// }
