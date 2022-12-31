@@ -16,9 +16,7 @@ const MotionRec = () => {
                 alert('event.accelerationIncludingGravity is null');
                 return;
               }
-              setAccelerationX(event.accelerationIncludingGravity.x)
-              setAccelerationY(event.accelerationIncludingGravity.y)
-              setAccelerationZ(event.accelerationIncludingGravity.z)
+
             })
           }
         })
@@ -27,7 +25,13 @@ const MotionRec = () => {
       alert('DeviceMotionEvent.requestPermission is not found')
     }
   }
-
+  
+  const getMotion = (event) => {
+    setAccelerationX(event.accelerationIncludingGravity.x)
+    setAccelerationY(event.accelerationIncludingGravity.y)
+    setAccelerationZ(event.accelerationIncludingGravity.z)
+  }
+  
   return (
     <div>MotionRec
       <input type="button" id="permit" value="SafariでDeviceOrientationを許可"/>
@@ -37,10 +41,11 @@ const MotionRec = () => {
         <Chart3Canvas id="mycanvas"></Chart3Canvas>
         
       </div>
-      <button onClick={deviceMotionRequest} />
-      <span>{accelerationX}</span>
-      <span>{accelerationY}</span>
-      <span>{accelerationZ}</span>
+      <button onClick={deviceMotionRequest}>A</button>
+      <button onClick={getMotion}>B</button>
+      <div>{accelerationX}</div>
+      <div>{accelerationY}</div>
+      <div>{accelerationZ}</div>
     </div>
   )
 }
