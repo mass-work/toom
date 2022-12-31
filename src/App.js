@@ -7,7 +7,7 @@ import BeamCalc from './pages/01_calc/01_BeamCalc/BeamCalc'
 import HomeIcon from '@mui/icons-material/Home';
 import Nut from './pages/02_elements/02_Nut/Nut';
 import Fft from './pages/05_mesure/01_fft/Fft';
-
+import WavesIcon from '@mui/icons-material/Waves';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
       <StyledHeader>
         TooM -Toolbox for Manufacturing-
         <Link to={`/toom/`}><HomeIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
-        <Link to={`/toom/mesure/fft/`}><HomeIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
+        <Link to={`/toom/mesure/fft/`}><WavesIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
       </StyledHeader>
         <Routes>
           <Route path="/toom/" element={<Home />} />

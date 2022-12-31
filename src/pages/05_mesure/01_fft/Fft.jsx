@@ -1,5 +1,7 @@
 import React from 'react'
-import { LineChart, Line, XAxis } from 'recharts';
+import { LineChart, Line, XAxis, YAxis } from 'recharts';
+import MotionRec from '../02_motionRec/MotionRec';
+
 
 const expi = (theta) => {return [Math.cos(theta), Math.sin(theta)]}
 const iadd = ([ax, ay], [bx, by]) => {return [ax + bx, ay + by]}
@@ -26,34 +28,37 @@ const fft0 = (f) => {
 // }
 
 const N = 2 ** 10
-const sinFrq = 10
-let a = []
+const sinFrq = 125
+let sinWave = []
 for (var j = 0; j < N; j++) {
-    a.push(Math.sin(Math.PI * 2 / N * j * sinFrq));
+    sinWave.push(Math.sin(Math.PI * 2 / 1000 * j * sinFrq));
 }
 
-const fr0 = a;
+const fr0 = sinWave;
 const f0 = fr0.map(r => [r, 0]);
 const F = fft0(f0);
 // const f1 = ifft0(F);
 // const fr1 = f1.map(([r]) => r);
-const amp = F.map(amp => Math.abs(amp[1]))
+const amp = F.map(amp => Math.abs(amp[1])/ N * 2 )
 
 const data = []
-const dataFft = []
 for (var i = 0; i < N; i++) {
     var dataTmp = {};
-    var dataFftTmp = {};
-
     // [{x:*, y:*, z:*}]の連想配列を作る
     dataTmp.x = i / 1000;
-    dataTmp.y = Math.sin(Math.PI * 2 / N * i * sinFrq);
+    dataTmp.y = sinWave[i];
     dataTmp.z = i ** i;
-
-    dataFftTmp.frq = 1 / 0.001 / N * i
-    dataFftTmp.amp = amp[i]
     // 連想配列を配列に追加していく
     data.push(dataTmp);
+}
+const frqData = 150
+const dataFft = []
+for (var k = 0; k < frqData; k++) {
+    var dataFftTmp = {};
+    // [{x:*, y:*, z:*}]の連想配列を作る
+    dataFftTmp.frq = 1 / 0.001 / N * k
+    dataFftTmp.amp = amp[k]
+    // 連想配列を配列に追加していく
     dataFft.push(dataFftTmp);
 }
 
@@ -70,13 +75,17 @@ const Fft = () => {
     <div>
         <LineChart width={400} height={400} data={data}>
             <XAxis dataKey="x" name="time" />
+            <YAxis />
             <Line type="monotone" dataKey="y" stroke="#8884d8" dot={false} />
         </LineChart>
 
         <LineChart width={400} height={400} data={dataFft}>
             <XAxis dataKey="frq" name="frq" />
+            <YAxis />
             <Line type="monotone" dataKey="amp" stroke="#8884d8" dot={false} />
         </LineChart>
+        <MotionRec />
+
   </div>
   )
 }
