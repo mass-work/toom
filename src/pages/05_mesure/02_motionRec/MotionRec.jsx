@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from "styled-components";
+// import useInterval from './components/UseInterval';
 
 const MotionRec = () => {
   const [accelerationX, setAccelerationX] = useState(0);
@@ -52,15 +53,24 @@ const MotionRec = () => {
     }
   }
 
-  // const sleep = async() => {
-  //     const date = new Date()
-  //     console.log(date.getUTCMilliseconds())
-  //     await new Promise(s => setTimeout(s, 200))
-  //     console.log(date.getUTCMilliseconds())
-  //   }
-  // sleep()
-
-
+  const startData = Date.now()
+  const smpTime = 500
+  const N = 2 ** 2
+  let getTime = []
+  let getX = []
+  let getY = []
+  let getZ = []
+  for (let i = 0; i < N; i++) {
+    let countTime = Date.now()
+    do{} while (Date.now() - countTime < smpTime)
+    console.log(Date.now()-startData)
+    getTime.push(Date.now()-startData)
+    getX.push(accelerationX)
+    getY.push(accelerationY)
+    getZ.push(accelerationZ)
+  }
+  console.log(getTime)
+ 
   return (
     <div>MotionRec
       <input type="button" id="permit" value="SafariでDeviceOrientationを許可"/>
@@ -74,6 +84,10 @@ const MotionRec = () => {
       <div>{accelerationX}</div>
       <div>{accelerationY}</div>
       <div>{accelerationZ}</div>
+      <div>{getTime}</div>
+      <div>{getX}</div>
+      <div>{getY}</div>
+      <div>{getZ}</div>
     </div>
   )
 }
