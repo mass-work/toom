@@ -91,9 +91,10 @@ const MotionRec = (props) => {
     return {getTimeAcc, getTime, getX, getY, getZ}
   }
   // console.log(recStart().getTime)
-  // console.log(recData)
+  // console.log(sp)
   props.setRecData(recData)
-
+  props.setSp(sp)
+  
   return (
     <div>MotionRec
       <input type="button" id="permit" value="SafariでDeviceOrientationを許可"/>

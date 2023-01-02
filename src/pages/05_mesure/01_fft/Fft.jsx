@@ -74,17 +74,24 @@ for (var k = 0; k < frqData; k++) {
 
 const Fft = () => {
     const [recData, setRecData] = useState('');
-    console.log(recData["getTime"].length)
+    const [sp, setSp] = useState("");
+    console.log(sp)
     const getTime = recData["getTime"]
     const getX = recData["getX"]
+    const getY = recData["getY"]
+    const getZ = recData["getZ"]
     let recPlotData = []
-    for (var l = 0; l < recData["getTime"].length; l++) {
-        var recDataTmp = {};
-        // [{x:*, y:*, z:*}]の連想配列を作る
-        recDataTmp.time = getTime[l]
-        recDataTmp.xAmp = getX[l]
-        // 連想配列を配列に追加していく
-        recPlotData.push(recDataTmp);
+    if (sp < 0){
+        for (var l = 0; l < sp; l++) {
+            var recDataTmp = {};
+            // [{x:*, y:*, z:*}]の連想配列を作る
+            recDataTmp.time = getTime[l]
+            recDataTmp.xAmp = getX[l]
+            recDataTmp.yAmp = getY[l]
+            recDataTmp.zAmp = getZ[l]
+            // 連想配列を配列に追加していく
+            recPlotData.push(recDataTmp);
+        }
     }
     
     console.log(dataFft)
@@ -106,9 +113,11 @@ const Fft = () => {
             <XAxis dataKey="getTime" name="Time" />
             <YAxis />
             <Line type="monotone" dataKey="xAmp" stroke="#8884d8" dot={false} />
+            <Line type="monotone" dataKey="yAmp" stroke="#84d8b1" dot={false} />
+            <Line type="monotone" dataKey="zAmp" stroke="#d0d884" dot={false} />
         </LineChart>
 
-        <MotionRec setRecData={setRecData}/>
+        <MotionRec setRecData={setRecData} setSp={setSp}/>
         <p>{recData[0]}</p>
 
     </div>
