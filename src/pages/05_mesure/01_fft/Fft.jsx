@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { LineChart, Line, XAxis, YAxis } from 'recharts';
 import MotionRec from '../02_motionRec/MotionRec';
+
+
 
 
 const expi = (theta) => {return [Math.cos(theta), Math.sin(theta)]}
@@ -71,7 +73,22 @@ for (var k = 0; k < frqData; k++) {
 // console.log(1/(1/1000*N/10))
 
 const Fft = () => {
-  return (
+    const [recData, setRecData] = useState('');
+    console.log(recData["getTime"].length)
+    const getTime = recData["getTime"]
+    const getX = recData["getX"]
+    let recPlotData = []
+    for (var l = 0; l < recData["getTime"].length; l++) {
+        var recDataTmp = {};
+        // [{x:*, y:*, z:*}]の連想配列を作る
+        recDataTmp.time = getTime[l]
+        recDataTmp.xAmp = getX[l]
+        // 連想配列を配列に追加していく
+        recPlotData.push(recDataTmp);
+    }
+    
+    console.log(dataFft)
+    return (
     <div>
         <LineChart width={400} height={400} data={data}>
             <XAxis dataKey="x" name="time" />
@@ -84,10 +101,18 @@ const Fft = () => {
             <YAxis />
             <Line type="monotone" dataKey="amp" stroke="#8884d8" dot={false} />
         </LineChart>
-        <MotionRec />
 
-  </div>
-  )
+        <LineChart width={400} height={400} data={recPlotData}>
+            <XAxis dataKey="getTime" name="Time" />
+            <YAxis />
+            <Line type="monotone" dataKey="xAmp" stroke="#8884d8" dot={false} />
+        </LineChart>
+
+        <MotionRec setRecData={setRecData}/>
+        <p>{recData[0]}</p>
+
+    </div>
+    )
 }
 
 export default Fft

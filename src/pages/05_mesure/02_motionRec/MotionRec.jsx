@@ -1,15 +1,20 @@
 import React, { useState } from 'react'
 import styled from "styled-components";
-// import useInterval from './components/UseInterval';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+// import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-const MotionRec = () => {
+const MotionRec = (props) => {
   const [accelerationX, setAccelerationX] = useState(0);
   const [accelerationY, setAccelerationY] = useState(0);
   const [accelerationZ, setAccelerationZ] = useState(0);
 
   const deviceMotionRequest = () => {
     // osを確認
-    function detectOSSimply() {
+    const detectOSSimply = () => {
       let ret;
       if (
           navigator.userAgent.indexOf("iPhone") > 0 ||
@@ -53,55 +58,90 @@ const MotionRec = () => {
     }
   }
 
-  const startData = Date.now()
-  const smpTime = 500
-  const N = 2 ** 2
-  let getTime = []
-  let getX = []
-  let getY = []
-  let getZ = []
-  for (let i = 0; i < N; i++) {
-    let countTime = Date.now()
-    do{} while (Date.now() - countTime < smpTime)
-    console.log(Date.now()-startData)
-    getTime.push(Date.now()-startData)
-    getX.push(accelerationX)
-    getY.push(accelerationY)
-    getZ.push(accelerationZ)
+  const [recData, setRecData] = useState('');
+
+  const [fs, setFs] = useState('');
+  const fsHandleChange = (event) => {setFs(event.target.value);};
+  const [sp, setSp] = useState('');
+  const spHandleChange = (event) => {setSp(event.target.value);};
+  const [timer, setTimer] = useState('');
+  const timerHandleChange = (event) => {setTimer(event.target.value);};
+  const nyquistFreq = 2.56
+
+  const recStart = () => {
+    let getTime = []
+    let getTimeAcc = []
+    let getX = []
+    let getY = []
+    let getZ = []
+    const smpTime = 1 / fs / nyquistFreq * 1000
+    const timerTime = timer * 1000
+    const timerCount = performance.now()
+    while (performance.now() - timerCount < timerTime){}
+    let startData = performance.now() 
+    for (let i = 0; i < sp; i++) {
+      let countTime = performance.now()
+      while (performance.now() - countTime < smpTime){}
+      getTimeAcc.push((performance.now()-startData) / 1000)
+      getTime.push(smpTime * i / 1000)
+      getX.push(accelerationX)
+      getY.push(accelerationY)
+      getZ.push(accelerationZ)
+    }
+    return {getTimeAcc, getTime, getX, getY, getZ}
   }
-  console.log(getTime)
- 
+  // console.log(recStart().getTime)
+  // console.log(recData)
+  props.setRecData(recData)
+
   return (
     <div>MotionRec
       <input type="button" id="permit" value="SafariでDeviceOrientationを許可"/>
-      <Chart1Canvas id="mychart1" ></Chart1Canvas>
-      <Chart2Canvas id="mychart2" ></Chart2Canvas>
-      <div id="cdiv">button
-        <Chart3Canvas id="mycanvas"></Chart3Canvas>
-        
-      </div>
       <button onClick={deviceMotionRequest}>A</button>
       <div>{accelerationX}</div>
       <div>{accelerationY}</div>
       <div>{accelerationZ}</div>
-      <div>{getTime}</div>
-      <div>{getX}</div>
-      <div>{getY}</div>
-      <div>{getZ}</div>
+
+      <button onClick={() => setRecData(recStart)}>
+       rec開始
+      </button>
+
+      <Box sx={{ minWidth: 120 }}>
+      <FormControl fullWidth>
+        <InputLabel id="fs-select-label">サンプリング周波数(Hz)</InputLabel>
+        <StyledSelect labelId="fs-select-label" id="fs-select" value={fs} label="fs" onChange={fsHandleChange}>
+          <MenuItem value={100}>100Hz</MenuItem>
+          <MenuItem value={500}>500Hz</MenuItem>
+          <MenuItem value={1000}>1000Hz</MenuItem>
+        </StyledSelect>
+        </FormControl>
+
+      <FormControl fullWidth>
+        <InputLabel id="sp-select-label">サンプリング点数</InputLabel>
+        <StyledSelect labelId="sp-select-label" id="sp-select" value={sp} label="sp" onChange={spHandleChange}>
+          <MenuItem value={512}>512点</MenuItem>
+          <MenuItem value={1024}>1024点</MenuItem>
+          <MenuItem value={2048}>2048点</MenuItem>
+        </StyledSelect>
+      </FormControl>
+
+      <FormControl fullWidth>
+        <InputLabel id="timer-select-label">タイマー(sec)</InputLabel>
+        <StyledSelect labelId="timer-select-label" id="timer-select" value={timer} label="timer" onChange={timerHandleChange}>
+          <MenuItem value={0}>0sec</MenuItem>
+          <MenuItem value={1}>1sec</MenuItem>
+          <MenuItem value={3}>3sec</MenuItem>
+          <MenuItem value={5}>5sec</MenuItem>
+          <MenuItem value={10}>10sec</MenuItem>
+        </StyledSelect>
+      </FormControl>
+
+    </Box>
     </div>
   )
 }
 
 export default MotionRec
-
-const Chart1Canvas = styled.canvas`
-  background-color: red;
-`
-const Chart2Canvas = styled.canvas`
-background-color: blue;
-`
-const Chart3Canvas = styled.canvas`
-  background-color: yellow;
-  width: 500px;
-  height: 250px;
+const StyledSelect = styled(Select)`
+  background-color: white;
 `
