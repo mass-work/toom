@@ -168,12 +168,11 @@ const Fft = () => {
             // 連想配列を配列に追加していく
             recPlotData.push(recDataTmp);
         }
-        setRecData(recPlotData)
       }
-      console.log(sp)
-      console.log(recPlotData)
+      return recPlotData
+      // console.log(sp)
+      // console.log(recPlotData)
     }
-
     return (
     <div>
         <LineChart width={400} height={400} data={data}>
@@ -201,7 +200,7 @@ const Fft = () => {
         <div>{accelerationX}</div>
         <div>{accelerationY}</div>
         <div>{accelerationZ}</div>
-        <button onClick={recStart}>rec開始</button>
+        <button onClick={() => setRecData(recStart)}>rec開始</button>
 
         <Box sx={{ minWidth: 120 }}>
         <FormControl fullWidth>
