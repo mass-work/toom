@@ -162,9 +162,9 @@ const Fft = () => {
             let recDataTmp = {};
             // [{x:*, y:*, z:*}]の連想配列を作る
             recDataTmp.time = getTime[l]
-            recDataTmp.xAmp = getX[l]
-            recDataTmp.yAmp = getY[l]
-            recDataTmp.zAmp = getZ[l]
+            recDataTmp.xAmp = getX[l] + 1
+            recDataTmp.yAmp = getY[l] + 2
+            recDataTmp.zAmp = getZ[l] + 3
             // 連想配列を配列に追加していく
             recPlotData.push(recDataTmp);
         }
@@ -192,8 +192,8 @@ const Fft = () => {
             <XAxis dataKey="Time" name="Time" />
             <YAxis />
             <Line type="monotone" dataKey="xAmp" stroke="#8884d8" dot={false} />
-            <Line type="monotone" dataKey="yAmp" stroke="#84d8b1" dot={false} />
-            <Line type="monotone" dataKey="zAmp" stroke="#d0d884" dot={false} />
+            {/* <Line type="monotone" dataKey="yAmp" stroke="#84d8b1" dot={false} />
+            <Line type="monotone" dataKey="zAmp" stroke="#d0d884" dot={false} /> */}
         </LineChart>
 
         {/* <input type="button" id="permit" value="SafariでDeviceOrientationを許可"/> */}
