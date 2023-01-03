@@ -162,7 +162,7 @@ const Fft = () => {
             let recDataTmp = {};
             // [{x:*, y:*, z:*}]の連想配列を作る
             recDataTmp.time = getTime[l]
-            recDataTmp.xAmp = getTime[l]
+            recDataTmp.xAmp = getX[l]
             recDataTmp.yAmp = getY[l]
             recDataTmp.zAmp = getZ[l]
             // 連想配列を配列に追加していく
