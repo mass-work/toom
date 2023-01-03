@@ -135,7 +135,7 @@ const Fft = () => {
     const timerHandleChange = (event) => {setTimer(event.target.value);};
     const nyquistFreq = 2.56
   
-    const recStart = () => {
+    const recStart = async() => {
       let getTime = []
       let getTimeAcc = []
       let getX = []
