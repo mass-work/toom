@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styled from "styled-components";
 import { LineChart, Line, XAxis, YAxis } from 'recharts';
 
@@ -80,72 +80,78 @@ for (var k = 0; k < frqData; k++) {
 
   
 const Fft = () => {
+  const [fs, setFs] = useState('');
+  const fsHandleChange = (event) => {setFs(event.target.value);};
+  const [sp, setSp] = useState('');
+  const spHandleChange = (event) => {setSp(event.target.value);};
+  const [timer, setTimer] = useState('');
+  const timerHandleChange = (event) => {setTimer(event.target.value);};
+  const nyquistFreq = 2.56
+
 
   let isTouch = false
   var canvas = document.getElementById( 'mycanvas' );
-  console.log(!canvas , !canvas.getContext )
-  if ( !canvas || !canvas.getContext ){};
 
-  if( window.TouchEvent ){
-    canvas.addEventListener( "touchstart", touchStart );
-    canvas.addEventListener( "touchend", touchEnd );
-  }
   function touchStart( e ){
     e.preventDefault();
     isTouch = true;
-    console.log(isTouch)
+    console.log(isTouch);
   }
   function touchEnd( e ){
     e.preventDefault();
     isTouch = false;
-    console.log("------------------------")
-    let getTime = []
-    let getTimeAcc = []
-    let getX = []
-    let getY = []
-    let getZ = []
-    const smpTime = 1 / fs / nyquistFreq * 1000
-    const timerTime = timer * 1000
-    const timerCount = performance.now()
-    while (performance.now() - timerCount < timerTime){}
-    let startData = performance.now() 
-    for (let i = 0; i < sp; i++) {
-      let countTime = performance.now()
-      while (performance.now() - countTime < smpTime){}
-      getTimeAcc.push((performance.now()-startData) / 1000)
-      getTime.push(smpTime * i / 1000)
-      getX.push(accelerationX)
-      getY.push(accelerationY)
-      getZ.push(accelerationZ)
-    }
-
-    let recPlotData = []
-    if (sp > 0){
-      for (let l = 0; l < sp; l++) {
-          let recDataTmp = {};
-          // [{x:*, y:*, z:*}]の連想配列を作る
-          recDataTmp.time = getTime[l]
-          recDataTmp.xAmp = getX[l]
-          recDataTmp.yAmp = getY[l]
-          recDataTmp.zAmp = getZ[l]
-          // 連想配列を配列に追加していく
-          recPlotData.push(recDataTmp);
-      }
-    }
-    console.log(recPlotData)
-    setRecData(recPlotData)
+    console.log("------------------------");
   }
 
+  useEffect(() => {
+    if (fs === "") {
+    } else {
+      if( window.TouchEvent ){
+        console.log("QQQQQ")
+        canvas.addEventListener( "touchstart", touchStart );
+        canvas.addEventListener( "touchend", touchEnd );
+      }
+    }
+  },[fs])
 
+ 
 
+    // let getTime = []
+    // let getTimeAcc = []
+    // let getX = []
+    // let getY = []
+    // let getZ = []
+    // const smpTime = 1 / fs / nyquistFreq * 1000
+    // const timerTime = timer * 1000
+    // const timerCount = performance.now()
+    // while (performance.now() - timerCount < timerTime){}
+    // let startData = performance.now() 
+    // for (let i = 0; i < sp; i++) {
+    //   let countTime = performance.now()
+    //   while (performance.now() - countTime < smpTime){}
+    //   getTimeAcc.push((performance.now()-startData) / 1000)
+    //   getTime.push(smpTime * i / 1000)
+    //   getX.push(accelerationX)
+    //   getY.push(accelerationY)
+    //   getZ.push(accelerationZ)
+    // }
 
-
-
-
-
-
-
-
+    // let recPlotData = []
+    // if (sp > 0){
+    //   for (let l = 0; l < sp; l++) {
+    //       let recDataTmp = {};
+    //       // [{x:*, y:*, z:*}]の連想配列を作る
+    //       recDataTmp.time = getTime[l]
+    //       recDataTmp.xAmp = getX[l]
+    //       recDataTmp.yAmp = getY[l]
+    //       recDataTmp.zAmp = getZ[l]
+    //       // 連想配列を配列に追加していく
+    //       recPlotData.push(recDataTmp);
+    //   }
+    // }
+    // console.log(recPlotData)
+    // // setRecData(recPlotData)
+  // }
 
 
   const [accelerationX, setAccelerationX] = useState(0);
@@ -198,13 +204,6 @@ const Fft = () => {
 
   const [recData, setRecData] = useState('');
 
-  const [fs, setFs] = useState('');
-  const fsHandleChange = (event) => {setFs(event.target.value);};
-  const [sp, setSp] = useState('');
-  const spHandleChange = (event) => {setSp(event.target.value);};
-  const [timer, setTimer] = useState('');
-  const timerHandleChange = (event) => {setTimer(event.target.value);};
-  const nyquistFreq = 2.56
 
   const recStart = () => {
     // let getTime = []
@@ -268,11 +267,13 @@ const Fft = () => {
       </LineChart>
 
       {/* <input type="button" id="permit" value="SafariでDeviceOrientationを許可"/> */}
-      <button onClick={deviceMotionRequest}>A</button>
+      <button onClick={deviceMotionRequest}>動作へのアクセスを許可</button>
       <div>{accelerationX}</div>
       <div>{accelerationY}</div>
       <div>{accelerationZ}</div>
-      <button onClick={recStart}>rec開始</button>
+
+
+      {/* <button onClick={recStart}>rec開始</button> */}
       {/* <button onClick={() => setRecData(recStart)}>rec開始</button> */}
 
       <Box sx={{ minWidth: 120 }}>
