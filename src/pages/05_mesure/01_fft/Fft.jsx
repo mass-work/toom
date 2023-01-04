@@ -101,6 +101,42 @@ const Fft = () => {
     e.preventDefault();
     isTouch = false;
     console.log("------------------------");
+
+    let getTime = []
+    let getTimeAcc = []
+    let getX = []
+    let getY = []
+    let getZ = []
+    const smpTime = 1 / fs / nyquistFreq * 1000
+    const timerTime = timer * 1000
+    const timerCount = performance.now()
+    while (performance.now() - timerCount < timerTime){}
+    let startData = performance.now() 
+    for (let i = 0; i < sp; i++) {
+      let countTime = performance.now()
+      while (performance.now() - countTime < smpTime){}
+      getTimeAcc.push((performance.now()-startData) / 1000)
+      getTime.push(smpTime * i / 1000)
+      getX.push(accelerationX)
+      getY.push(accelerationY)
+      getZ.push(accelerationZ)
+    }
+
+    let recPlotData = []
+    if (sp > 0){
+      for (let l = 0; l < sp; l++) {
+          let recDataTmp = {};
+          // [{x:*, y:*, z:*}]の連想配列を作る
+          recDataTmp.time = getTime[l]
+          recDataTmp.xAmp = getX[l]
+          recDataTmp.yAmp = getY[l]
+          recDataTmp.zAmp = getZ[l]
+          // 連想配列を配列に追加していく
+          recPlotData.push(recDataTmp);
+      }
+    }
+    console.log(getTime)
+    setRecData(recPlotData)
   }
 
   useEffect(() => {
@@ -116,42 +152,6 @@ const Fft = () => {
 
  
 
-    // let getTime = []
-    // let getTimeAcc = []
-    // let getX = []
-    // let getY = []
-    // let getZ = []
-    // const smpTime = 1 / fs / nyquistFreq * 1000
-    // const timerTime = timer * 1000
-    // const timerCount = performance.now()
-    // while (performance.now() - timerCount < timerTime){}
-    // let startData = performance.now() 
-    // for (let i = 0; i < sp; i++) {
-    //   let countTime = performance.now()
-    //   while (performance.now() - countTime < smpTime){}
-    //   getTimeAcc.push((performance.now()-startData) / 1000)
-    //   getTime.push(smpTime * i / 1000)
-    //   getX.push(accelerationX)
-    //   getY.push(accelerationY)
-    //   getZ.push(accelerationZ)
-    // }
-
-    // let recPlotData = []
-    // if (sp > 0){
-    //   for (let l = 0; l < sp; l++) {
-    //       let recDataTmp = {};
-    //       // [{x:*, y:*, z:*}]の連想配列を作る
-    //       recDataTmp.time = getTime[l]
-    //       recDataTmp.xAmp = getX[l]
-    //       recDataTmp.yAmp = getY[l]
-    //       recDataTmp.zAmp = getZ[l]
-    //       // 連想配列を配列に追加していく
-    //       recPlotData.push(recDataTmp);
-    //   }
-    // }
-    // console.log(recPlotData)
-    // // setRecData(recPlotData)
-  // }
 
 
   const [accelerationX, setAccelerationX] = useState(0);
