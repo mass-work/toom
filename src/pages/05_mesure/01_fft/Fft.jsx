@@ -133,12 +133,13 @@ const Fft = () => {
           // 連想配列を配列に追加していく
           recPlotData.push(recDataTmp);
       }
+      setRecData(recPlotData)
+      console.log(recData)
     }
     // console.log(getTime)
     // console.log(getX)
     // console.log(recPlotData)
-    setRecData(recPlotData)
-    console.log(recPlotData)
+
   }
 
   useEffect(() => {
@@ -332,6 +333,7 @@ const Fft = () => {
 
 
       <StyledCanvas id="mycanvas">test</StyledCanvas>
+      <div>{}</div>
 
   </div>
   )
