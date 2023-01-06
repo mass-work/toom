@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from "styled-components";
 import { LineChart, Line, XAxis, YAxis } from 'recharts';
 
@@ -88,7 +88,6 @@ const Fft = () => {
   const timerHandleChange = (event) => {setTimer(event.target.value);};
   const nyquistFreq = 2.56
 
-
   let isTouch = false
   var canvas = document.getElementById( 'mycanvas' );
 
@@ -135,23 +134,44 @@ const Fft = () => {
           recPlotData.push(recDataTmp);
       }
     }
-    console.log(getTime)
+    // console.log(getTime)
+    // console.log(getX)
+    // console.log(recPlotData)
     setRecData(recPlotData)
+    console.log(recPlotData)
   }
 
   useEffect(() => {
-    if (fs === "") {
+    if (fs === "" ) {
     } else {
+      touchEventStart()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[fs])
+  useEffect(() => {
+    if (sp === "" ) {
+    } else {
+      touchEventStart()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[sp])
+  useEffect(() => {
+    if (timer === "" ) {
+    } else {
+      touchEventStart()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[timer])
+
+ 
+  const touchEventStart = () => {
       if( window.TouchEvent ){
         console.log("QQQQQ")
         canvas.addEventListener( "touchstart", touchStart );
         canvas.addEventListener( "touchend", touchEnd );
       }
-    }
-  },[fs])
 
- 
-
+  }
 
 
   const [accelerationX, setAccelerationX] = useState(0);
@@ -206,6 +226,8 @@ const Fft = () => {
 
 
   const recStart = () => {
+    console.log(recData)
+    // setRecData(recData)
     // let getTime = []
     // let getTimeAcc = []
     // let getX = []
@@ -273,7 +295,7 @@ const Fft = () => {
       <div>{accelerationZ}</div>
 
 
-      {/* <button onClick={recStart}>rec開始</button> */}
+      <button onClick={recStart}>rec開始</button>
       {/* <button onClick={() => setRecData(recStart)}>rec開始</button> */}
 
       <Box sx={{ minWidth: 120 }}>
