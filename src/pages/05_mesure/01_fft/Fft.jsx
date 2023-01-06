@@ -180,7 +180,7 @@ const Fft = () => {
   const [accelerationZ, setAccelerationZ] = useState(0);
 
   // センサーにアクセス-------------------------------
-  const deviceMotionRequest = () => {
+  const deviceMotionRequest = async () => {
     // osを確認
     const detectOSSimply = () => {
       let ret;
