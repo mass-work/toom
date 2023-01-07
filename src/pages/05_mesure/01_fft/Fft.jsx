@@ -327,7 +327,7 @@ const Fft = () => {
 
   const newRecstart = () => {
     const os = checkOS();
-    if (os !== "iphone") {
+    if (os === "iphone") {
       // osがiosの場合にセンサーにアクセス
       if (DeviceMotionEvent.requestPermission) {
         DeviceMotionEvent.requestPermission()
