@@ -286,6 +286,7 @@ const Fft = () => {
   }
 
   const newGetMotion = (event) => {
+    event.preventDefault();
     if (!event.acceleration) {
       alert('event.accelerationIncludingGravity is null');
       return;
