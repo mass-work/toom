@@ -88,7 +88,7 @@ const Fft = () => {
   const timerHandleChange = (event) => {setTimer(event.target.value);};
   const nyquistFreq = 2.56
 
-  let isTouch = false
+  var isTouch = false
   var canvas = document.getElementById( 'mycanvas' );
 
   function touchStart( e ){
@@ -327,27 +327,62 @@ const Fft = () => {
   }
 
   const newRecstart = () => {
-    const os = checkOS();
-    if (os === "iphone") {
-      // osがiosの場合にセンサーにアクセス
-      if (DeviceMotionEvent.requestPermission) {
-        DeviceMotionEvent.requestPermission()
-          .then(permissionState => {
-            if (permissionState === 'granted') {
-              window.addEventListener("devicemotion", newGetMotion)
-            }
-          })
-          .catch(console.error);
-      } else {
-        alert('DeviceMotionEvent.requestPermission is not found')
-      }
-    } else if (os === "android") {
-        window.alert("android未対応")
-    } else{
-        window.alert("PC未対応");
-    }
+    isTouch = true
+    
+    // const os = checkOS();
+    // if (os === "iphone") {
+    //   // osがiosの場合にセンサーにアクセス
+    //   if (DeviceMotionEvent.requestPermission) {
+    //     DeviceMotionEvent.requestPermission()
+    //       .then(permissionState => {
+    //         if (permissionState === 'granted') {
+    //           window.addEventListener("devicemotion", newGetMotion)
+    //         }
+    //       })
+    //       .catch(console.error);
+    //   } else {
+    //     alert('DeviceMotionEvent.requestPermission is not found')
+    //   }
+    // } else if (os === "android") {
+    //     window.alert("android未対応")
+    // } else{
+    //     window.alert("PC未対応");
+    // }
   }
 
+  const newMotionRequest = () => {
+    DeviceMotionEvent.requestPermission().then( function( response ){
+      if( response === 'granted' ){
+        window.addEventListener( "devicemotion", deviceMotion );
+      }
+    }).catch( function( e ){
+      console.log( e );
+    });
+  }
+  var motionData = [];
+
+  function deviceMotion( e ){
+    e.preventDefault();
+    if( isTouch ){
+      let ac = e.acceleration;
+      let motion = {};
+      motion['ac'] = ac;
+      motionData.push( motion );
+      console.log(motionData)
+    }
+  }
+  
+  useEffect(() => {
+    init()
+  },[])
+  function init(){
+    if( window.DeviceMotionEvent ){
+      if( DeviceMotionEvent.requestPermission && typeof DeviceMotionEvent.requestPermission === 'function' ){
+      }else{
+        window.addEventListener( "devicemotion", deviceMotion );
+      }
+    }
+  }
 
   return (
   <div>
@@ -379,6 +414,7 @@ const Fft = () => {
 
 
       <button onClick={recStart}>rec開始</button>
+      <button onClick={newMotionRequest}>newmotionRequest</button>
       <button onClick={newRecstart}>newrec開始</button>
       {/* <button onClick={() => setRecData(recStart)}>rec開始</button> */}
 
@@ -416,7 +452,7 @@ const Fft = () => {
 
 
       <StyledCanvas id="mycanvas">test</StyledCanvas>
-      <div>{}</div>
+      <div>{motionData}</div>
 
 
   </div>
