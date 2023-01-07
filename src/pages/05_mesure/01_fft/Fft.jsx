@@ -180,7 +180,7 @@ const Fft = () => {
   const [accelerationZ, setAccelerationZ] = useState(0);
 
   // センサーにアクセス-------------------------------
-  const deviceMotionRequest = async () => {
+  const deviceMotionRequest = () => {
     // osを確認
     const detectOSSimply = () => {
       let ret;
@@ -201,7 +201,7 @@ const Fft = () => {
           .then(permissionState => {
             if (permissionState === 'granted') {
               window.addEventListener("devicemotion", (event) => {
-                if (!event.accelerationIncludingGravity) {
+                if (!event.acceleration) {
                   alert('event.accelerationIncludingGravity is null');
                   return;
                 }
@@ -225,8 +225,7 @@ const Fft = () => {
 
   const [recData, setRecData] = useState('');
 
-
-  const recStart = async () => {
+  const recStart = () => {
     let getTime = []
     let getTimeAcc = []
     let getX = []
@@ -265,6 +264,89 @@ const Fft = () => {
   }
 
 
+  //デバイスへのアクセスを有効にする。
+  //recボタン押下時にrecStartをtrueにして、配列を空にする
+  //recstartがtureの場合に配列への取り込みをする関数が自動に実行されるようにする。
+  //
+
+  const checkOS = () => {
+    let ret;
+    if (
+        navigator.userAgent.indexOf("iPhone") > 0 ||
+        navigator.userAgent.indexOf("iPad") > 0 ||
+        navigator.userAgent.indexOf("iPod") > 0
+    ) {
+        ret = "iphone";   // iPad OS13のsafariはデフォルト「Macintosh」なので別途要対応
+    } else if (navigator.userAgent.indexOf("Android") > 0) {
+        ret = "android";
+    } else {
+        ret = "pc";
+    }
+    return ret;
+  }
+
+  const newGetMotion = (event) => {
+    if (!event.acceleration) {
+      alert('event.accelerationIncludingGravity is null');
+      return;
+    }
+    let getTime = []
+    let getTimeAcc = []
+    let getX = []
+    let getY = []
+    let getZ = []
+    const smpTime = 1 / fs / nyquistFreq * 1000
+    const timerTime = timer * 1000
+    const timerCount = performance.now()
+    while (performance.now() - timerCount < timerTime){}
+    let startData = performance.now() 
+    for (let i = 0; i < sp; i++) {
+      let countTime = performance.now()
+      while (performance.now() - countTime < smpTime){}
+      getTimeAcc.push((performance.now()-startData) / 1000)
+      getTime.push(smpTime * i / 1000)
+      getX.push(event.acceleration.x)
+      getY.push(event.acceleration.y)
+      getZ.push(event.acceleration.z)
+    }
+    let recPlotData = []
+    if (sp > 0){
+      for (let l = 0; l < sp; l++) {
+          let recDataTmp = {};
+          // [{x:*, y:*, z:*}]の連想配列を作る
+          recDataTmp.time = getTime[l]
+          recDataTmp.xAmp = getX[l]
+          recDataTmp.yAmp = getY[l]
+          recDataTmp.zAmp = getZ[l]
+          // 連想配列を配列に追加していく
+          recPlotData.push(recDataTmp);
+      }
+      setRecData(recPlotData)
+    }
+  }
+
+  const newRecstart = () => {
+    const os = checkOS();
+    if (os !== "iphone") {
+      // osがiosの場合にセンサーにアクセス
+      if (DeviceMotionEvent.requestPermission) {
+        DeviceMotionEvent.requestPermission()
+          .then(permissionState => {
+            if (permissionState === 'granted') {
+              window.addEventListener("devicemotion", newGetMotion)
+            }
+          })
+          .catch(console.error);
+      } else {
+        alert('DeviceMotionEvent.requestPermission is not found')
+      }
+    } else if (os === "android") {
+        window.alert("android未対応")
+    } else{
+        window.alert("PC未対応");
+    }
+  }
+
 
   return (
   <div>
@@ -296,6 +378,7 @@ const Fft = () => {
 
 
       <button onClick={recStart}>rec開始</button>
+      <button onClick={newRecstart}>newrec開始</button>
       {/* <button onClick={() => setRecData(recStart)}>rec開始</button> */}
 
       <Box sx={{ minWidth: 120 }}>
