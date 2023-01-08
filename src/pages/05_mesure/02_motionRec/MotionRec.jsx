@@ -20,7 +20,7 @@ const MotionRec = () => {
       const motion = {};
       motion['ac'] = ac;
       motionDataTemp.push( motion );
-      setMotionData(motionDataTemp)
+      // setMotionData(motionDataTemp);
     }
   }
 
@@ -40,7 +40,7 @@ const MotionRec = () => {
       <button onClick={recording}>rec</button>
       <button onClick={consoleOut}>console</button>
       <p>{recStart}</p>
-      <p>{motionData}</p>
+      <p>{motionDataTemp}</p>
     </DivMain>
   )
 }
