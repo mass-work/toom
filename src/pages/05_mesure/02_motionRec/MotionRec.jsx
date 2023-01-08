@@ -13,6 +13,11 @@ const MotionRec = () => {
     }).catch( function( e ){console.log( e )})
   }
 
+
+  const [accelerationX, setAccelerationX] = useState(0);
+  const [accelerationY, setAccelerationY] = useState(0);
+  const [accelerationZ, setAccelerationZ] = useState(0);
+
   const deviceMotion = ( e ) => {
     e.preventDefault();
     if( recStart === "true" ){
@@ -20,9 +25,15 @@ const MotionRec = () => {
       const motion = {};
       motion['ac'] = ac;
       motionDataTemp.push( motion );
+
+      setAccelerationX(e.acceleration.x)
+      setAccelerationY(e.acceleration.y)
+      setAccelerationZ(e.acceleration.z)
       // setMotionData(motionDataTemp);
     }
   }
+
+
 
   const recording = () => {
     setMotionData([])
@@ -40,7 +51,7 @@ const MotionRec = () => {
       <button onClick={recording}>rec</button>
       <button onClick={consoleOut}>console</button>
       <p>{recStart}</p>
-      <p>{motionDataTemp}</p>
+      <p>{accelerationX}</p>
     </DivMain>
   )
 }
