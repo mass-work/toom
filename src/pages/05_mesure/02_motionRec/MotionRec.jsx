@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import styled from "styled-components";
 
 const MotionRec = () => {
-  const [recStart, setRecStart] = useState('false')
-  let motionData = []
+  const [recStart, setRecStart] = useState("false")
+  const [motionData, setMotionData] = useState([1,2,3])
+  let motionDataTemp = []
 
   const clickRequestDeviceSensor = () => {
     //. ユーザーに「許可」を明示させる必要がある
@@ -14,18 +15,20 @@ const MotionRec = () => {
 
   const deviceMotion = ( e ) => {
     e.preventDefault();
-    if( recStart ){
+    if( recStart === "true" ){
       const ac = e.acceleration;
       const motion = {};
       motion['ac'] = ac;
-      motionData.push( motion );
+      motionDataTemp.push( motion );
+      setMotionData(motionDataTemp)
     }
   }
 
   const recording = () => {
-    motionData = []
-    setRecStart('trueeeee')
+    setMotionData([])
+    setRecStart("true")
   }
+
   const consoleOut = () => {
     console.log(motionData)
   }
@@ -33,9 +36,11 @@ const MotionRec = () => {
   return (
     <DivMain>MotionRec
       <button onClick={clickRequestDeviceSensor}>アクセスを許可</button>
+      <button onClick={deviceMotion}>device motion</button>
       <button onClick={recording}>rec</button>
       <button onClick={consoleOut}>console</button>
       <p>{recStart}</p>
+      <p>{motionData}</p>
     </DivMain>
   )
 }
