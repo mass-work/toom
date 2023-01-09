@@ -24,7 +24,7 @@ const MotionRec = () => {
       let motionDataTemp = [] 
       for (let i = 0; i < 4; i++) {
         let countTime = performance.now()
-        while (performance.now() - countTime < 500){}
+        // while (performance.now() - countTime < 1){}
         motionDataTemp.push(Math.round(e.acceleration.x * 100) / 100)
       }
 
