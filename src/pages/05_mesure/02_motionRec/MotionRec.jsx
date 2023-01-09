@@ -12,7 +12,6 @@ const MotionRec = () => {
     }).catch( function( e ){console.log( e )})
   }
 
-
   const [accelerationX, setAccelerationX] = useState(0);
   // const [accelerationY, setAccelerationY] = useState(0);
   // const [accelerationZ, setAccelerationZ] = useState(0);
@@ -23,9 +22,10 @@ const MotionRec = () => {
     if( recStart === "true" ){
       setAccelerationX(e.acceleration.x)
       let motionDataTemp = []
-      for (let i = 0; i < 3; i++) {
-        motionDataTemp.push(e.acceleration.x)
+      for (let i = 0; i < 2; i++) {
+        motionDataTemp.push(Math.round(e.acceleration.x * 100) / 100)
       }
+
       setMotionData(motionDataTemp)
   
       // const ac = e.acceleration;
