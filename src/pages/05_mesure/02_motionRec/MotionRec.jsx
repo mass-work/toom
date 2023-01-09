@@ -8,7 +8,19 @@ const MotionRec = () => {
   const clickRequestDeviceSensor = () => {
     //. ユーザーに「許可」を明示させる必要がある
     DeviceMotionEvent.requestPermission().then( function( response ){
-      if( response === 'granted' ){window.addEventListener( "devicemotion", deviceMotion )}
+
+      if( response === 'granted' ){
+        let motionDataTemp = [] 
+        for (let i = 0; i < 6; i++) {
+          let countTime = performance.now()
+          while (performance.now() - countTime < 10){}
+          window.addEventListener( "devicemotion", deviceMotion )
+          motionDataTemp.push(Math.round(accelerationX * 100) / 100)
+        }
+        setMotionData(motionDataTemp)
+      }
+
+
     }).catch( function( e ){console.log( e )})
   }
 
@@ -21,17 +33,7 @@ const MotionRec = () => {
     e.preventDefault();
     if( recStart === "true" ){
       setAccelerationX(e.acceleration.x)
-      let motionDataTemp = [] 
-      for (let i = 0; i < 4; i++) {
-        let countTime = performance.now()
-        while (performance.now() - countTime < 10){}
-        motionDataTemp.push(Math.round(e.acceleration.x * 100) / 100)
-      }
-
-      setMotionData(motionDataTemp)
-  
-
-  
+ 
       // const ac = e.acceleration;
       // const motion = {};
       // motion['ac'] = ac;
