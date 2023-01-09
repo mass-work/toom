@@ -3,9 +3,8 @@ import styled from "styled-components";
 
 const MotionRec = () => {
   const [recStart, setRecStart] = useState("false")
-  const [motionData, setMotionData] = useState([1,2,3])
-  // let motionDataTemp = []
-
+  const [motionData, setMotionData] = useState([0])
+  
   const clickRequestDeviceSensor = () => {
     //. ユーザーに「許可」を明示させる必要がある
     DeviceMotionEvent.requestPermission().then( function( response ){
@@ -22,14 +21,21 @@ const MotionRec = () => {
     console.log(recStart)
     e.preventDefault();
     if( recStart === "true" ){
+      setAccelerationX(e.acceleration.x)
+      let motionDataTemp = []
+      for (let i = 0; i < 3; i++) {
+        motionDataTemp.push(i)
+      }
+      setMotionData(motionDataTemp)
+  
       // const ac = e.acceleration;
       // const motion = {};
       // motion['ac'] = ac;
       // motionDataTemp.push( motion );
 
-      setAccelerationX(e.acceleration.x)
-      // setAccelerationY(e.acceleration.y)
       // setAccelerationZ(e.acceleration.z)
+
+
       // setMotionData(motionDataTemp);
     }
   }
@@ -41,9 +47,6 @@ const MotionRec = () => {
     setRecStart("true")
   }
 
-  const consoleOut = () => {
-    console.log(motionData)
-  }
 
   return (
     <DivMain>
@@ -56,11 +59,9 @@ const MotionRec = () => {
       <div>
         <button onClick={recording}>rec</button>
       </div>
-      <div>
-        <button onClick={consoleOut}>console</button>
-      </div>
       <p>{recStart}</p>
       <p>{accelerationX}</p>
+      <p>{motionData}</p>
     </DivMain>
   )
 }
