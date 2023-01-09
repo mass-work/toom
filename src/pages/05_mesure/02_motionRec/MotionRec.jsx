@@ -21,13 +21,20 @@ const MotionRec = () => {
     e.preventDefault();
     if( recStart === "true" ){
       setAccelerationX(e.acceleration.x)
-      let motionDataTemp = []
-      for (let i = 0; i < 2; i++) {
+      let motionDataTemp = [] 
+      for (let i = 0; i < 4; i++) {
+        let countTime = performance.now()
+        while (performance.now() - countTime < 500){}
         motionDataTemp.push(Math.round(e.acceleration.x * 100) / 100)
       }
 
       setMotionData(motionDataTemp)
   
+
+
+      for (let i = 0; i < sp; i++) {
+ 
+
       // const ac = e.acceleration;
       // const motion = {};
       // motion['ac'] = ac;
