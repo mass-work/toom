@@ -24,18 +24,20 @@ const MotionRec = () => {
     }).catch( function( e ){console.log( e )})
   }
 
-  const [accelerationX, setAccelerationX] = useState(0);
-  const [accelerationY, setAccelerationY] = useState(0);
+  const [accelerationX, setAccelerationX] = useState([]);
+  // const [accelerationY, setAccelerationY] = useState([]);
   // const [accelerationZ, setAccelerationZ] = useState(0);
 
   const deviceMotion = ( e ) => {
     console.log(recStart)
     e.preventDefault();
     if( recStart === "true" ){
-      setAccelerationX(e.acceleration.x)
+      for (let i = 0; i < 10; i++) {
+        setAccelerationX([...accelerationX, Math.round(e.acceleration.x * 10) / 10])
+      }
+
       // let countTime = performance.now()
       // while (performance.now() - countTime < 100){}
-      setAccelerationY(e.acceleration.x)
       // motionDataTemp.push(Math.round(e.acceleration.x * 100) / 100)
       // const ac = e.acceleration;
       // const motion = {};
@@ -69,7 +71,6 @@ const MotionRec = () => {
       </div>
       <p>{recStart}</p>
       <p>{accelerationX}</p>
-      <p>{accelerationY}</p>
       <p>{motionData}</p>
     </DivMain>
   )
