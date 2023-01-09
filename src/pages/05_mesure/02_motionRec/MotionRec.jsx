@@ -31,10 +31,7 @@ const MotionRec = () => {
       setMotionData(motionDataTemp)
   
 
-
-      for (let i = 0; i < sp; i++) {
- 
-
+  
       // const ac = e.acceleration;
       // const motion = {};
       // motion['ac'] = ac;
