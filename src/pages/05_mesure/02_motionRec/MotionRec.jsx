@@ -10,14 +10,14 @@ const MotionRec = () => {
     DeviceMotionEvent.requestPermission().then( function( response ){
 
       if( response === 'granted' ){
-        let motionDataTemp = [] 
-        for (let i = 0; i < 6; i++) {
-          let countTime = performance.now()
-          while (performance.now() - countTime < 100){}
+        // let motionDataTemp = [] 
+        // for (let i = 0; i < 6; i++) {
+        //   let countTime = performance.now()
+        //   while (performance.now() - countTime < 100){}
           window.addEventListener( "devicemotion", deviceMotion )
-          motionDataTemp.push(Math.round(accelerationX * 100) / 100)
-        }
-      setMotionData(motionDataTemp)
+          // motionDataTemp.push(Math.round(accelerationX * 100) / 100)
+        // }
+      // setMotionData(motionDataTemp)
       }
 
 
@@ -25,7 +25,7 @@ const MotionRec = () => {
   }
 
   const [accelerationX, setAccelerationX] = useState(0);
-  // const [accelerationY, setAccelerationY] = useState(0);
+  const [accelerationY, setAccelerationY] = useState(0);
   // const [accelerationZ, setAccelerationZ] = useState(0);
 
   const deviceMotion = ( e ) => {
@@ -33,6 +33,9 @@ const MotionRec = () => {
     e.preventDefault();
     if( recStart === "true" ){
       setAccelerationX(e.acceleration.x)
+      let countTime = performance.now()
+      while (performance.now() - countTime < 100){}
+      setAccelerationY(e.acceleration.x)
       // motionDataTemp.push(Math.round(e.acceleration.x * 100) / 100)
       // const ac = e.acceleration;
       // const motion = {};
@@ -66,6 +69,7 @@ const MotionRec = () => {
       </div>
       <p>{recStart}</p>
       <p>{accelerationX}</p>
+      <p>{accelerationY}</p>
       <p>{motionData}</p>
     </DivMain>
   )
