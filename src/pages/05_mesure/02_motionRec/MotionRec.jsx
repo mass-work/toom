@@ -4,7 +4,7 @@ import styled from "styled-components";
 const MotionRec = () => {
   const [recStart, setRecStart] = useState("false")
   const [motionData, setMotionData] = useState([1,2,3])
-  let motionDataTemp = []
+  // let motionDataTemp = []
 
   const clickRequestDeviceSensor = () => {
     //. ユーザーに「許可」を明示させる必要がある
@@ -15,20 +15,21 @@ const MotionRec = () => {
 
 
   const [accelerationX, setAccelerationX] = useState(0);
-  const [accelerationY, setAccelerationY] = useState(0);
-  const [accelerationZ, setAccelerationZ] = useState(0);
+  // const [accelerationY, setAccelerationY] = useState(0);
+  // const [accelerationZ, setAccelerationZ] = useState(0);
 
   const deviceMotion = ( e ) => {
+    console.log(recStart)
     e.preventDefault();
     if( recStart === "true" ){
-      const ac = e.acceleration;
-      const motion = {};
-      motion['ac'] = ac;
-      motionDataTemp.push( motion );
+      // const ac = e.acceleration;
+      // const motion = {};
+      // motion['ac'] = ac;
+      // motionDataTemp.push( motion );
 
       setAccelerationX(e.acceleration.x)
-      setAccelerationY(e.acceleration.y)
-      setAccelerationZ(e.acceleration.z)
+      // setAccelerationY(e.acceleration.y)
+      // setAccelerationZ(e.acceleration.z)
       // setMotionData(motionDataTemp);
     }
   }
@@ -45,11 +46,19 @@ const MotionRec = () => {
   }
 
   return (
-    <DivMain>MotionRec
-      <button onClick={clickRequestDeviceSensor}>アクセスを許可</button>
-      <button onClick={deviceMotion}>device motion</button>
-      <button onClick={recording}>rec</button>
-      <button onClick={consoleOut}>console</button>
+    <DivMain>
+      <div>
+       <button onClick={clickRequestDeviceSensor}>アクセスを許可</button>
+      </div>
+      <div>
+        <button onClick={deviceMotion}>device motion</button>
+      </div>
+      <div>
+        <button onClick={recording}>rec</button>
+      </div>
+      <div>
+        <button onClick={consoleOut}>console</button>
+      </div>
       <p>{recStart}</p>
       <p>{accelerationX}</p>
     </DivMain>
