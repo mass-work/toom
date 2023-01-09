@@ -11,12 +11,12 @@ const MotionRec = () => {
 
       if( response === 'granted' ){
         // let motionDataTemp = [] 
-        // for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 6; i++) {
         //   let countTime = performance.now()
         //   while (performance.now() - countTime < 100){}
           window.addEventListener( "devicemotion", deviceMotion )
           // motionDataTemp.push(Math.round(accelerationX * 100) / 100)
-        // }
+        }
       // setMotionData(motionDataTemp)
       }
 
