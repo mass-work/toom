@@ -24,7 +24,7 @@ const MotionRec = () => {
       setAccelerationX(e.acceleration.x)
       let motionDataTemp = []
       for (let i = 0; i < 3; i++) {
-        motionDataTemp.push(i)
+        motionDataTemp.push(e.acceleration.x)
       }
       setMotionData(motionDataTemp)
   
@@ -34,7 +34,6 @@ const MotionRec = () => {
       // motionDataTemp.push( motion );
 
       // setAccelerationZ(e.acceleration.z)
-
 
       // setMotionData(motionDataTemp);
     }
