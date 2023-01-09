@@ -32,9 +32,9 @@ const MotionRec = () => {
     console.log(recStart)
     e.preventDefault();
     if( recStart === "true" ){
-      for (let i = 0; i < 10; i++) {
+      // for (let i = 0; i < 10; i++) {
         setAccelerationX([...accelerationX, Math.round(e.acceleration.x * 10) / 10])
-      }
+      // }
 
       // let countTime = performance.now()
       // while (performance.now() - countTime < 100){}
