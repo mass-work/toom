@@ -33,8 +33,8 @@ const MotionRec = () => {
     e.preventDefault();
     if( recStart === "true" ){
       setAccelerationX(e.acceleration.x)
-      let countTime = performance.now()
-      while (performance.now() - countTime < 100){}
+      // let countTime = performance.now()
+      // while (performance.now() - countTime < 100){}
       setAccelerationY(e.acceleration.x)
       // motionDataTemp.push(Math.round(e.acceleration.x * 100) / 100)
       // const ac = e.acceleration;
