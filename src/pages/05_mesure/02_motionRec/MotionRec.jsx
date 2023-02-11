@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 // 加速度を取得する関数コンポーネントを定義する
 const Accelerometer = () => {
+  const [outData, setOutData] = useState(); // データの初期値は空の配列
   // useStateフックで加速度のデータを管理する
   const [data, setData] = useState([]); // データの初期値は空の配列
   // useStateフックでボタンの状態を管理する
@@ -23,14 +24,7 @@ const Accelerometer = () => {
         return [...prevData, { x, y, z }];
       });
     };
-
-
-
-
-
-
     
-
     // ボタンの状態に応じて、モーションセンサーのイベントリスナーを登録したり解除したりする
     if (button) {
       // ボタンがtrueなら、イベントリスナーを登録する
@@ -42,13 +36,10 @@ const Accelerometer = () => {
         }
         }).catch( function( e ){console.log( e )})
 
-
-
     } else {
       // ボタンがfalseなら、イベントリスナーを解除する
       window.removeEventListener("devicemotion", handleDeviceMotion);
     }
-
     // クリーンアップ関数を返す
     return () => {
       // モーションセンサーのイベントリスナーを解除する
@@ -62,6 +53,10 @@ const Accelerometer = () => {
     setButton((prevButton) => !prevButton);
   };
 
+  const refreshData = () => {
+    setOutData(data)
+  }
+
 
 
 
@@ -69,8 +64,11 @@ const Accelerometer = () => {
   // JSXで画面に表示する内容を返す
   return (
     <div>
-      <p>加速度のデータ: {JSON.stringify(data)}</p>
+      {/* <p>加速度のデータ: {JSON.stringify(data)}</p> */}
+      <button onClick={refreshData}>refresh</button>
+      <p>{outData}</p>
       <button onClick={handleClick}>{button ? "停止" : "開始"}</button>
+
     </div>
   );
 };
