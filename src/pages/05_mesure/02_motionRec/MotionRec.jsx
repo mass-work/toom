@@ -54,7 +54,7 @@ const Accelerometer = () => {
   };
 
   const refreshData = () => {
-    setOutData(data)
+    setOutData(JSON.stringify(data))
   }
 
 
