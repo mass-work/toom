@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 // 加速度を取得する関数コンポーネントを定義する
 const Accelerometer = () => {
-  const [outData, setOutData] = useState(); // データの初期値は空の配列
+  const [outData, setOutData] = useState([]); // データの初期値は空の配列
   // useStateフックで加速度のデータを管理する
   const [data, setData] = useState([]); // データの初期値は空の配列
   // useStateフックでボタンの状態を管理する
@@ -58,15 +58,12 @@ const Accelerometer = () => {
   }
 
 
-
-
-
   // JSXで画面に表示する内容を返す
   return (
     <div>
       {/* <p>加速度のデータ: {JSON.stringify(data)}</p> */}
       <button onClick={refreshData}>refresh</button>
-      <p>{outData}</p>
+      <p>out{outData}</p>
       <button onClick={handleClick}>{button ? "停止" : "開始"}</button>
 
     </div>
