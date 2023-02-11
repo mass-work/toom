@@ -73,17 +73,7 @@ const Accelerometer = () => {
 // 加速度を取得する関数コンポーネントをエクスポートする
 export default Accelerometer;
 
-
-
-
-
-
-
-
-
-
-
-
+// ---------------------------------------------------
 
 // import React, { useState } from 'react'
 // import styled from "styled-components";
