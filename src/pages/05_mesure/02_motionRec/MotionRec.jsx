@@ -24,10 +24,26 @@ const Accelerometer = () => {
       });
     };
 
+
+
+
+
+
+    
+
     // ボタンの状態に応じて、モーションセンサーのイベントリスナーを登録したり解除したりする
     if (button) {
       // ボタンがtrueなら、イベントリスナーを登録する
-      window.addEventListener("devicemotion", handleDeviceMotion);
+      //. ユーザーに「許可」を明示させる必要がある
+      DeviceMotionEvent.requestPermission().then( function( response ){
+        if( response === 'granted' ){
+          // window.addEventListener( "devicemotion", handleDeviceMotion );
+          window.addEventListener("devicemotion", handleDeviceMotion);
+        }
+        }).catch( function( e ){console.log( e )})
+
+
+
     } else {
       // ボタンがfalseなら、イベントリスナーを解除する
       window.removeEventListener("devicemotion", handleDeviceMotion);
@@ -46,12 +62,16 @@ const Accelerometer = () => {
     setButton((prevButton) => !prevButton);
   };
 
+
+
+
+
   // JSXで画面に表示する内容を返す
   return (
     <div>
       <p>加速度のデータ: {JSON.stringify(data)}</p>
       <button onClick={handleClick}>{button ? "停止" : "開始"}</button>
-      </div>
+    </div>
   );
 };
 
@@ -77,24 +97,24 @@ export default Accelerometer;
 //   const [recStart, setRecStart] = useState("false")
 //   const [motionData, setMotionData] = useState([0])
   
-//   const clickRequestDeviceSensor = () => {
-//     //. ユーザーに「許可」を明示させる必要がある
-//     DeviceMotionEvent.requestPermission().then( function( response ){
+  // const clickRequestDeviceSensor = () => {
+  //   //. ユーザーに「許可」を明示させる必要がある
+  //   DeviceMotionEvent.requestPermission().then( function( response ){
 
-//       if( response === 'granted' ){
-//         // let motionDataTemp = [] 
-//         for (let i = 0; i < 6; i++) {
-//         //   let countTime = performance.now()
-//         //   while (performance.now() - countTime < 100){}
-//           window.addEventListener( "devicemotion", deviceMotion )
-//           // motionDataTemp.push(Math.round(accelerationX * 100) / 100)
-//         }
-//       // setMotionData(motionDataTemp)
-//       }
+  //     if( response === 'granted' ){
+  //       // let motionDataTemp = [] 
+  //       for (let i = 0; i < 6; i++) {
+  //       //   let countTime = performance.now()
+  //       //   while (performance.now() - countTime < 100){}
+  //         window.addEventListener( "devicemotion", deviceMotion )
+  //         // motionDataTemp.push(Math.round(accelerationX * 100) / 100)
+  //       }
+  //     // setMotionData(motionDataTemp)
+  //     }
 
 
-//     }).catch( function( e ){console.log( e )})
-//   }
+  //   }).catch( function( e ){console.log( e )})
+  // }
 
 //   const [accelerationX, setAccelerationX] = useState([]);
 //   // const [accelerationY, setAccelerationY] = useState([]);
