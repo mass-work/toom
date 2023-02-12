@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 
 // 加速度を取得する関数コンポーネントを定義する
 const MotionRec = () => {
+  // let msec = [];
   const [outData, setOutData] = useState([]);
   // useStateフックで加速度のデータを管理する
   const [data, setData] = useState([]); // データの初期値は空の配列
@@ -12,7 +13,7 @@ const MotionRec = () => {
   useEffect(() => {
     const handleDeviceMotion = (event) => {     // イベントハンドラを定義する
       const { x, y, z } = event.acceleration;   // イベントオブジェクトから加速度を取得する
-      const msec = Date.now(); // Performanceオブジェクトのnow()メソッドで時間の原点からの経過時間をマイクロ秒単位で取得する
+      // msec.push(Date.now()) // Performanceオブジェクトのnow()メソッドで時間の原点からの経過時間をマイクロ秒単位で取得する
       setData((prevData) => {                   // データに加速度を追加する
         // if (prevData.length >= 1024) { prevData.shift() } // データが1024点に達したら、先頭の要素を削除する
         if (prevData.length >= 10) { 
