@@ -19,7 +19,8 @@ const MotionRec = () => {
           // setButton((prevButton) => !prevButton);
           return;
          } // データが1024点に達したら、先頭の要素を削除する
-        return [...prevData, { x, y, z ,microTime}];      // データの末尾に加速度を追加する
+        // return [...prevData, { x, y, z,microTime}];      // データの末尾に加速度を追加する
+        return [...prevData, {microTime}];      // データの末尾に加速度を追加する
       });
     };
     
