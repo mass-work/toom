@@ -13,7 +13,11 @@ const MotionRec = () => {
     const handleDeviceMotion = (event) => {     // イベントハンドラを定義する
       const { x, y, z } = event.acceleration;   // イベントオブジェクトから加速度を取得する
       setData((prevData) => {                   // データに加速度を追加する
-        if (prevData.length >= 10) { prevData.shift() } // データが1024点に達したら、先頭の要素を削除する
+        // if (prevData.length >= 10) { prevData.shift() } // データが1024点に達したら、先頭の要素を削除する
+        if (prevData.length >= 10) { 
+          setButton((prevButton) => !prevButton);
+          break;
+         } // データが1024点に達したら、先頭の要素を削除する
         return [...prevData, { x, y, z }];      // データの末尾に加速度を追加する
       });
     };
