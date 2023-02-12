@@ -1,27 +1,20 @@
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 
 // 加速度を取得する関数コンポーネントを定義する
-const Accelerometer = () => {
-  const [outData, setOutData] = useState([]); // データの初期値は空の配列
+const MotionRec = () => {
+  const [outData, setOutData] = useState([]);
   // useStateフックで加速度のデータを管理する
   const [data, setData] = useState([]); // データの初期値は空の配列
   // useStateフックでボタンの状態を管理する
   const [button, setButton] = useState(false); // ボタンの初期値はfalse
   // useEffectフックでモーションセンサーのイベントリスナーを登録する
   useEffect(() => {
-    // イベントハンドラを定義する
-    const handleDeviceMotion = (event) => {
-      // イベントオブジェクトから加速度を取得する
-      const { x, y, z } = event.acceleration;
-
-      // データに加速度を追加する
-      setData((prevData) => {
-        // データが1024点に達したら、先頭の要素を削除する
-        if (prevData.length >= 1024) {
-          prevData.shift();
-        }
-        // データの末尾に加速度を追加する
-        return [...prevData, { x, y, z }];
+    const handleDeviceMotion = (event) => {     // イベントハンドラを定義する
+      const { x, y, z } = event.acceleration;   // イベントオブジェクトから加速度を取得する
+      setData((prevData) => {                   // データに加速度を追加する
+        if (prevData.length >= 10) { prevData.shift() } // データが1024点に達したら、先頭の要素を削除する
+        return [...prevData, { x, y, z }];      // データの末尾に加速度を追加する
       });
     };
     
@@ -32,10 +25,9 @@ const Accelerometer = () => {
       DeviceMotionEvent.requestPermission().then( function( response ){
         if( response === 'granted' ){
           // window.addEventListener( "devicemotion", handleDeviceMotion );
-          window.addEventListener("devicemotion", handleDeviceMotion);
+          window.addEventListener("devicemotion", handleDeviceMotion, { frequency: 10 });
         }
-        }).catch( function( e ){console.log( e )})
-
+      }).catch( function( e ){console.log( e )})
     } else {
       // ボタンがfalseなら、イベントリスナーを解除する
       window.removeEventListener("devicemotion", handleDeviceMotion);
@@ -46,7 +38,7 @@ const Accelerometer = () => {
       window.removeEventListener("devicemotion", handleDeviceMotion);
     };
   }, [button]); // 依存配列にボタンの状態を入れる
-
+  
   // ボタンをクリックしたときのイベントハンドラを定義する
   const handleClick = () => {
     // setButton関数でボタンの状態を反転する
@@ -54,6 +46,7 @@ const Accelerometer = () => {
   };
 
   const refreshData = () => {
+    console.log(data)
     setOutData(JSON.stringify(data))
   }
 
@@ -65,13 +58,12 @@ const Accelerometer = () => {
       <button onClick={refreshData}>refresh</button>
       <p>out{outData}</p>
       <button onClick={handleClick}>{button ? "停止" : "開始"}</button>
-
     </div>
   );
 };
 
 // 加速度を取得する関数コンポーネントをエクスポートする
-export default Accelerometer;
+export default MotionRec;
 
 // ---------------------------------------------------
 
