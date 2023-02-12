@@ -33,7 +33,7 @@ const MotionRec = () => {
       DeviceMotionEvent.requestPermission().then( function( response ){
         if( response === 'granted' ){
           // window.addEventListener( "devicemotion", handleDeviceMotion );
-          window.addEventListener("devicemotion", handleDeviceMotion, { frequency: 10 });
+          window.addEventListener("devicemotion", handleDeviceMotion, { frequency: 1 });
         }
       }).catch( function( e ){console.log( e )})
     } else {
