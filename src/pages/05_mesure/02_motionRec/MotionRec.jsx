@@ -12,13 +12,14 @@ const MotionRec = () => {
   useEffect(() => {
     const handleDeviceMotion = (event) => {     // イベントハンドラを定義する
       const { x, y, z } = event.acceleration;   // イベントオブジェクトから加速度を取得する
+      const unixTime = Date.now()
       setData((prevData) => {                   // データに加速度を追加する
         // if (prevData.length >= 10) { prevData.shift() } // データが1024点に達したら、先頭の要素を削除する
         if (prevData.length >= 10) { 
           // setButton((prevButton) => !prevButton);
           return;
          } // データが1024点に達したら、先頭の要素を削除する
-        return [...prevData, { x, y, z }];      // データの末尾に加速度を追加する
+        return [...prevData, { unixTime, x, y, z }];      // データの末尾に加速度を追加する
       });
     };
     
