@@ -14,7 +14,7 @@ const MotionRec = () => {
     const handleDeviceMotion = (event) => {     // イベントハンドラを定義する
       const { x, y, z } = event.acceleration;   // イベントオブジェクトから加速度を取得する
       // msec.push(Date.now()) // Performanceオブジェクトのnow()メソッドで時間の原点からの経過時間をマイクロ秒単位で取得する
-      const msec = Data.now();
+      const msec = Date.now();
       setData((prevData) => {                   // データに加速度を追加する
         if (prevData.length >= 10) { prevData.shift() } // データが1024点に達したら、先頭の要素を削除する
         // if (prevData.length >= 10) { 
