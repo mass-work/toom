@@ -78,7 +78,8 @@ const MotionRec = () => {
       {/* <p>加速度のデータ: {JSON.stringify(data)}</p> */}
       <button onClick={refreshData}>refresh</button>
       <p>out1:{outData}</p>
-      <p>out2:{testOutData2}</p>
+      <p>out2:{testOutData}</p>
+      <p>out3:{testOutData2}</p>
       <button onClick={handleClick}>{button ? "停止" : "開始"}</button>
     </div>
   );
