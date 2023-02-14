@@ -19,10 +19,12 @@ const MotionRec = () => {
       let msec1 = performance.now();
       let testData = []
       let calc = 0
+      let x1
       for (let i = 0; i < 2; i++) {
         for (let i = 0; i < 10000000; i++) {calc = i * i}
         msec1 = performance.now();
-        testData.push(msec1);
+        x1 = event.acceleration.x
+        testData.push([msec1, x1]);
       }
 
       setTestOutData(testData)
