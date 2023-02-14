@@ -16,10 +16,11 @@ const MotionRec = () => {
     const handleDeviceMotion = (event) => {     // イベントハンドラを定義する
       const { x, y, z } = event.acceleration;   // イベントオブジェクトから加速度を取得する
       const msec = performance.now();
+      let msec1 = performance.now();
       let testData = []
       for (let i = 0; i < 5; i++) {
-        const { xa, ya, za } = event.acceleration;   // イベントオブジェクトから加速度を取得する
-        testData.push(xa);
+        msec1 = performance.now();
+        testData.push(msec1);
       }
       setTestOutData((testData) => {return testData})
 
@@ -66,7 +67,7 @@ const MotionRec = () => {
     setOutData(JSON.stringify(data))
     setTestOutData2(testOutData)
   }
-  
+
   useEffect(() => {
     setTestOutData2(testOutData);
   }, [testOutData]);
