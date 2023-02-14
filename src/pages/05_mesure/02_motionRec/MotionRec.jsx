@@ -15,7 +15,7 @@ const MotionRec = () => {
     const handleDeviceMotion = (event) => {     // イベントハンドラを定義する
       const { x, y, z } = event.acceleration;   // イベントオブジェクトから加速度を取得する
       const msec = performance.now();
-      testData = []
+      const testData = []
       for (var i = 0; i < 5; i++) {
         const { xa, ya, za } = event.acceleration;   // イベントオブジェクトから加速度を取得する
         testData.push(xa);
