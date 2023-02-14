@@ -10,15 +10,17 @@ const MotionRec = () => {
   // useStateフックでボタンの状態を管理する
   const [button, setButton] = useState(false); // ボタンの初期値はfalse
   // useEffectフックでモーションセンサーのイベントリスナーを登録する
+  const [testOutData, setTestOutData] = useState([]);
   useEffect(() => {
     const handleDeviceMotion = (event) => {     // イベントハンドラを定義する
       const { x, y, z } = event.acceleration;   // イベントオブジェクトから加速度を取得する
       const msec = performance.now();
-      const testData = []
+      testData = []
       for (var i = 0; i < 5; i++) {
         const { xa, ya, za } = event.acceleration;   // イベントオブジェクトから加速度を取得する
         testData.push(xa);
       }
+      setTestOutData(testData)
 
       setData((prevData) => {                   // データに加速度を追加する
         if (prevData.length >= 10) { prevData.shift() } // データが1024点に達したら、先頭の要素を削除する
@@ -70,7 +72,7 @@ const MotionRec = () => {
       {/* <p>加速度のデータ: {JSON.stringify(data)}</p> */}
       <button onClick={refreshData}>refresh</button>
       <p>out1:{outData}</p>
-      <p>out2:{testData}</p>
+      <p>out2:{testOutData}</p>
       <button onClick={handleClick}>{button ? "停止" : "開始"}</button>
     </div>
   );
