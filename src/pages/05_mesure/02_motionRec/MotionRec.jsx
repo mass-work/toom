@@ -14,6 +14,12 @@ const MotionRec = () => {
     const handleDeviceMotion = (event) => {     // イベントハンドラを定義する
       const { x, y, z } = event.acceleration;   // イベントオブジェクトから加速度を取得する
       const msec = performance.now();
+      const testData = []
+      for (var i = 0; i < 5; i++) {
+        const { xa, ya, za } = event.acceleration;   // イベントオブジェクトから加速度を取得する
+        testData.push(xa);
+      }
+
       setData((prevData) => {                   // データに加速度を追加する
         if (prevData.length >= 10) { prevData.shift() } // データが1024点に達したら、先頭の要素を削除する
         // if (prevData.length >= 10) { 
@@ -63,7 +69,8 @@ const MotionRec = () => {
     <div>
       {/* <p>加速度のデータ: {JSON.stringify(data)}</p> */}
       <button onClick={refreshData}>refresh</button>
-      <p>out{outData}</p>
+      <p>out1:{outData}</p>
+      <p>out2:{testData}</p>
       <button onClick={handleClick}>{button ? "停止" : "開始"}</button>
     </div>
   );
