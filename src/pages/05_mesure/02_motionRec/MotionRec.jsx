@@ -22,7 +22,8 @@ const MotionRec = () => {
         msec1 = performance.now();
         testData.push(msec1);
       }
-      setTestOutData((testData) => {return testData})
+
+      setTestOutData(testData)
 
       setData((prevData) => {                   // データに加速度を追加する
         if (prevData.length >= 10) { prevData.shift() } // データが1024点に達したら、先頭の要素を削除する
