@@ -18,7 +18,9 @@ const MotionRec = () => {
       const msec = performance.now();
       let msec1 = performance.now();
       let testData = []
-      for (let i = 0; i < 5; i++) {
+      let calc = 0
+      for (let i = 0; i < 2; i++) {
+        for (let i = 0; i < 10000; i++) {calc = i * i}
         msec1 = performance.now();
         testData.push(msec1);
       }
