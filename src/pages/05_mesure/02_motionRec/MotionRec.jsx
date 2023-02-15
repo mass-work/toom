@@ -20,10 +20,10 @@ const MotionRec = () => {
       let testData = []
       let calc = 0
       let x1
-      for (let i = 0; i < 2; i++) {
+      for (let i = 0; i < 3; i++) {
         for (let i = 0; i < 10000000; i++) {calc = i * i}
         msec1 = performance.now();
-        x1 = event.acceleration.x
+        x1 = Math.round(event.acceleration.x * 10 **3) / 10 ** 3
         testData.push([msec1, x1]);
       }
 
