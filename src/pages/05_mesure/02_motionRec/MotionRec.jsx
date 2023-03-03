@@ -5,7 +5,7 @@ import { LineChart, Line, XAxis, YAxis } from 'recharts';
 // 加速度を取得する関数コンポーネントを定義する
 const MotionRec = () => {
   const aDP = 100
-  const timeDP = 10
+  const timeDP = 1000
   const measurementTime = 20000
   const [outData, setOutData] = useState([]);
   // useStateフックで加速度のデータを管理する
