@@ -14,6 +14,7 @@ const MotionRec = () => {
   const [button, setButton] = useState(false); // ボタンの初期値はfalse
   // useEffectフックでモーションセンサーのイベントリスナーを登録する
   useEffect(() => {
+    setData([]);
     const handleDeviceMotion = (event) => {     // イベントハンドラを定義する
       const { x, y, z } = event.acceleration;   // イベントオブジェクトから加速度を取得する
       // const msec = Math.round(performance.now() * timeDP) / timeDP;
