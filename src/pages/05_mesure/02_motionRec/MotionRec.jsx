@@ -76,6 +76,8 @@ const MotionRec = () => {
           <XAxis dataKey="msec" name="msec" />
           <YAxis />
           <Line type="monotone" dataKey="x" stroke="#8884d8" dot={false} />
+          <Line type="monotone" dataKey="y" stroke="#8884d8" dot={false} />
+          <Line type="monotone" dataKey="z" stroke="#8884d8" dot={false} />
       </LineChart>
 
 
