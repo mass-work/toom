@@ -21,7 +21,7 @@ const MotionRec = () => {
         if (prevData.length >= 1024) { prevData.shift() } // データが1024点に達したら、先頭の要素を削除する
         // 時間軸を0スタートとする処理
         const msec = Math.round(performance.now() * timeDP) / timeDP / 1000;
-        const diff = prevData.length > 0 ? msec - prevData[0].msec : 0;
+        const diff = prevData.length > 0 ? Math.round((msec - prevData[0].msec) * timeDP) / timeDP / 1000 : 0;
         // const newData = prevData.map((d) => ({ ...d, msec: Math.round((d.msec - prevData[0].msec) * timeDP) / timeDP }));
         // return [...newData, { msec, diff, x: Math.round(x * aDP) / aDP, y: Math.round(y * aDP) / aDP, z: Math.round(z * aDP) / aDP }];
         // return [...prevData, {msec, x: Math.round(x * aDP) / aDP, y: Math.round(y * aDP) / aDP, z: Math.round(z * aDP) / aDP}];
