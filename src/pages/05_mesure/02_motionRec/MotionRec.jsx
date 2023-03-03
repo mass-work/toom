@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 
 // 加速度を取得する関数コンポーネントを定義する
 const MotionRec = () => {
-  // let msec = [];
   const [outData, setOutData] = useState([]);
   // useStateフックで加速度のデータを管理する
   const [data, setData] = useState([]); // データの初期値は空の配列
@@ -56,8 +55,6 @@ const MotionRec = () => {
     setOutData(JSON.stringify(data))
   }
 
-
-
   // JSXで画面に表示する内容を返す
   return (
     <div>
@@ -65,6 +62,7 @@ const MotionRec = () => {
       <button onClick={refreshData}>refresh</button>
       {/* <button onClick={handleDeviceMotion}>refresh</button> */}
       <p>out1:{outData}</p>
+      <p>out2:{data}</p>
       <button onClick={handleClick}>{button ? "停止" : "開始"}</button>
     </div>
   );
