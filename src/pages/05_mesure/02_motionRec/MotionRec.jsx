@@ -81,7 +81,7 @@ const MotionRec = () => {
       <button onClick={handleClick}>{button ? "停止" : "開始"}</button>
 
       <LineChart width={400} height={400} data={data}>
-          <XAxis dataKey="msec" name="msec" />
+          <XAxis dataKey="diff" name="msec" />
           <YAxis />
           <Line type="monotone" dataKey="x" stroke="#8884d8" dot={false} />
           <Line type="monotone" dataKey="y" stroke="#84d8b8" dot={false} />
