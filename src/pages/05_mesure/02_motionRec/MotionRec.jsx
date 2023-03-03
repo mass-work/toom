@@ -18,8 +18,11 @@ const MotionRec = () => {
       const msec = Math.round(performance.now() * timeDP) / timeDP;
       setData((prevData) => {                   // データに加速度を追加する
         if (prevData.length >= 1024) { prevData.shift() } // データが1024点に達したら、先頭の要素を削除する
-        //  } // データが1024点に達したら、先頭の要素を削除する
-        // return [...prevData, {msec, x, y, z}];      // データの末尾に加速度を追加する
+
+
+
+
+
         return [...prevData, {msec, x: Math.round(x * aDP) / aDP, y: Math.round(y * aDP) / aDP, z: Math.round(z * aDP) / aDP}];
       });
     };
@@ -30,7 +33,7 @@ const MotionRec = () => {
       //. ユーザーに「許可」を明示させる必要がある
       DeviceMotionEvent.requestPermission().then( function( response ){
         if( response === 'granted' ){
-          window.addEventListener("devicemotion", handleDeviceMotion, { frequency: 100 });
+          window.addEventListener("devicemotion", handleDeviceMotion, { frequency: 10 });
         }
       }).catch( function( e ){console.log( e )})
       
@@ -76,10 +79,9 @@ const MotionRec = () => {
           <XAxis dataKey="msec" name="msec" />
           <YAxis />
           <Line type="monotone" dataKey="x" stroke="#8884d8" dot={false} />
-          <Line type="monotone" dataKey="y" stroke="#8884d8" dot={false} />
-          <Line type="monotone" dataKey="z" stroke="#8884d8" dot={false} />
+          <Line type="monotone" dataKey="y" stroke="#84d8b8" dot={false} />
+          <Line type="monotone" dataKey="z" stroke="#c2d884" dot={false} />
       </LineChart>
-
 
     </div>
   );
