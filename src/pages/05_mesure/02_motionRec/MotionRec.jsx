@@ -22,7 +22,8 @@ const MotionRec = () => {
         // 時間軸を0スタートとする処理
         const msec = Math.round(performance.now() * timeDP) / timeDP / 1000;
         const diff = prevData.length > 0 ? msec - prevData[0].msec : 0;
-        const newData = prevData.map((d) => ({ ...d, msec: Math.round((d.msec - prevData[0].msec) * timeDP) / timeDP }));
+        // const newData = prevData.map((d) => ({ ...d, msec: Math.round((d.msec - prevData[0].msec) * timeDP) / timeDP }));
+        const newData = prevData.map((d) => ({ ...d, msec: msec}));
         return [...newData, { msec, diff, x: Math.round(x * aDP) / aDP, y: Math.round(y * aDP) / aDP, z: Math.round(z * aDP) / aDP }];
         // return [...prevData, {msec, x: Math.round(x * aDP) / aDP, y: Math.round(y * aDP) / aDP, z: Math.round(z * aDP) / aDP}];
       });
