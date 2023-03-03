@@ -12,15 +12,12 @@ const MotionRec = () => {
   useEffect(() => {
     const handleDeviceMotion = (event) => {     // イベントハンドラを定義する
       const { x, y, z } = event.acceleration;   // イベントオブジェクトから加速度を取得する
-      const msec = performance.now();
+      const msec = Math.round(performance.now() * 10) / 10;
       setData((prevData) => {                   // データに加速度を追加する
         if (prevData.length >= 10) { prevData.shift() } // データが1024点に達したら、先頭の要素を削除する
-        // if (prevData.length >= 10) { 
-          // setButton((prevButton) => !prevButton);
-          // return;
         //  } // データが1024点に達したら、先頭の要素を削除する
-        return [...prevData, {msec, x, y, z}];      // データの末尾に加速度を追加する
-        // return [...prevData, msec];      // データの末尾に加速度を追加する
+        // return [...prevData, {msec, x, y, z}];      // データの末尾に加速度を追加する
+        return [...prevData, {msec, x: Math.round(x * 10) / 10, y: Math.round(y * 10) / 10, z: Math.round(z * 10) / 10}];
       });
     };
     
@@ -62,7 +59,6 @@ const MotionRec = () => {
       <button onClick={refreshData}>refresh</button>
       {/* <button onClick={handleDeviceMotion}>refresh</button> */}
       <p>out1:{outData}</p>
-      <p>out2:{data}</p>
       <button onClick={handleClick}>{button ? "停止" : "開始"}</button>
     </div>
   );
