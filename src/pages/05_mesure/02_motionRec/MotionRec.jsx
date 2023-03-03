@@ -23,25 +23,33 @@ const MotionRec = () => {
         return [...prevData, {msec, x: Math.round(x * aDP) / aDP, y: Math.round(y * aDP) / aDP, z: Math.round(z * aDP) / aDP}];
       });
     };
-    
     // ボタンの状態に応じて、モーションセンサーのイベントリスナーを登録したり解除したりする
+    let timeoutId;
     if (button) {
       // ボタンがtrueなら、イベントリスナーを登録する
       //. ユーザーに「許可」を明示させる必要がある
       DeviceMotionEvent.requestPermission().then( function( response ){
         if( response === 'granted' ){
-          // window.addEventListener( "devicemotion", handleDeviceMotion );
           window.addEventListener("devicemotion", handleDeviceMotion, { frequency: 100 });
         }
       }).catch( function( e ){console.log( e )})
+      
+      // 5秒後にボタンをfalseに変更する
+      timeoutId = setTimeout(() => {
+        setButton(false);
+      }, 5000);
+
+
     } else {
       // ボタンがfalseなら、イベントリスナーを解除する
       window.removeEventListener("devicemotion", handleDeviceMotion);
+      clearTimeout(timeoutId);
     }
     // クリーンアップ関数を返す
     return () => {
       // モーションセンサーのイベントリスナーを解除する
       window.removeEventListener("devicemotion", handleDeviceMotion);
+      clearTimeout(timeoutId);
     };
   }, [button]); // 依存配列にボタンの状態を入れる
   
