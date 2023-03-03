@@ -6,6 +6,7 @@ import { LineChart, Line, XAxis, YAxis } from 'recharts';
 const MotionRec = () => {
   const aDP = 100
   const timeDP = 10
+  const measurementTime = 20000
   const [outData, setOutData] = useState([]);
   // useStateフックで加速度のデータを管理する
   const [data, setData] = useState([]); // データの初期値は空の配列
@@ -19,11 +20,15 @@ const MotionRec = () => {
       setData((prevData) => {                   // データに加速度を追加する
         if (prevData.length >= 1024) { prevData.shift() } // データが1024点に達したら、先頭の要素を削除する
 
+        const msec = Math.round(performance.now() * timeDP) / timeDP;
+        const diff = prevData.length > 0 ? msec - prevData[0].msec : 0;
+        const newData = prevData.map((d) => ({ ...d, msec: Math.round((d.msec - prevData[0].msec) * timeDP) / timeDP }));
+        return [...newData, { msec, diff, x: Math.round(x * aDP) / aDP, y: Math.round(y * aDP) / aDP, z: Math.round(z * aDP) / aDP }];
+      
 
 
 
-
-        return [...prevData, {msec, x: Math.round(x * aDP) / aDP, y: Math.round(y * aDP) / aDP, z: Math.round(z * aDP) / aDP}];
+        // return [...prevData, {msec, x: Math.round(x * aDP) / aDP, y: Math.round(y * aDP) / aDP, z: Math.round(z * aDP) / aDP}];
       });
     };
     // ボタンの状態に応じて、モーションセンサーのイベントリスナーを登録したり解除したりする
@@ -40,7 +45,7 @@ const MotionRec = () => {
       // 5秒後にボタンをfalseに変更する
       timeoutId = setTimeout(() => {
         setButton(false);
-      }, 5000);
+      }, measurementTime);
 
 
     } else {
