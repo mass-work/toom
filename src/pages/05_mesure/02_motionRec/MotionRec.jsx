@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 
 // 加速度を取得する関数コンポーネントを定義する
 const MotionRec = () => {
+  const aDP = 100
+  const timeDP = 10
   const [outData, setOutData] = useState([]);
   // useStateフックで加速度のデータを管理する
   const [data, setData] = useState([]); // データの初期値は空の配列
@@ -12,12 +14,12 @@ const MotionRec = () => {
   useEffect(() => {
     const handleDeviceMotion = (event) => {     // イベントハンドラを定義する
       const { x, y, z } = event.acceleration;   // イベントオブジェクトから加速度を取得する
-      const msec = Math.round(performance.now() * 10) / 10;
+      const msec = Math.round(performance.now() * timeDP) / timeDP;
       setData((prevData) => {                   // データに加速度を追加する
         if (prevData.length >= 10) { prevData.shift() } // データが1024点に達したら、先頭の要素を削除する
         //  } // データが1024点に達したら、先頭の要素を削除する
         // return [...prevData, {msec, x, y, z}];      // データの末尾に加速度を追加する
-        return [...prevData, {msec, x: Math.round(x * 10) / 10, y: Math.round(y * 10) / 10, z: Math.round(z * 10) / 10}];
+        return [...prevData, {msec, x: Math.round(x * aDP) / aDP, y: Math.round(y * aDP) / aDP, z: Math.round(z * aDP) / aDP}];
       });
     };
     
