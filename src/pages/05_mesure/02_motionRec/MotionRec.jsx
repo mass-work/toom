@@ -10,25 +10,10 @@ const MotionRec = () => {
   // useStateフックでボタンの状態を管理する
   const [button, setButton] = useState(false); // ボタンの初期値はfalse
   // useEffectフックでモーションセンサーのイベントリスナーを登録する
-  const [testOutData, setTestOutData] = useState([]);
-  const [testOutData2, setTestOutData2] = useState([]);
   useEffect(() => {
     const handleDeviceMotion = (event) => {     // イベントハンドラを定義する
       const { x, y, z } = event.acceleration;   // イベントオブジェクトから加速度を取得する
       const msec = performance.now();
-      let msec1 = performance.now();
-      let testData = []
-      let calc = 0
-      let x1
-      for (let i = 0; i < 3; i++) {
-        for (let i = 0; i < 10000000; i++) {calc = i * i}
-        msec1 = performance.now();
-        x1 = Math.round(event.acceleration.x * 10 **3) / 10 ** 3
-        testData.push([msec1, x1]);
-      }
-
-      setTestOutData(testData)
-
       setData((prevData) => {                   // データに加速度を追加する
         if (prevData.length >= 10) { prevData.shift() } // データが1024点に達したら、先頭の要素を削除する
         // if (prevData.length >= 10) { 
@@ -47,7 +32,7 @@ const MotionRec = () => {
       DeviceMotionEvent.requestPermission().then( function( response ){
         if( response === 'granted' ){
           // window.addEventListener( "devicemotion", handleDeviceMotion );
-          window.addEventListener("devicemotion", handleDeviceMotion, { frequency: 200 });
+          window.addEventListener("devicemotion", handleDeviceMotion, { frequency: 100 });
         }
       }).catch( function( e ){console.log( e )})
     } else {
@@ -68,24 +53,18 @@ const MotionRec = () => {
   };
 
   const refreshData = () => {
-    console.log(data)
     setOutData(JSON.stringify(data))
-    setTestOutData2(testOutData)
   }
 
-  useEffect(() => {
-    setTestOutData2(testOutData);
-  }, [testOutData]);
+
 
   // JSXで画面に表示する内容を返す
   return (
     <div>
       {/* <p>加速度のデータ: {JSON.stringify(data)}</p> */}
       <button onClick={refreshData}>refresh</button>
-      <button onClick={handleDeviceMotion}>refresh</button>
+      {/* <button onClick={handleDeviceMotion}>refresh</button> */}
       <p>out1:{outData}</p>
-      <p>out2:{testOutData}</p>
-      <p>out3:{testOutData2}</p>
       <button onClick={handleClick}>{button ? "停止" : "開始"}</button>
     </div>
   );
