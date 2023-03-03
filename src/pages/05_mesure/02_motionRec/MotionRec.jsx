@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { LineChart, Line, XAxis, YAxis } from 'recharts';
 // import styled from "styled-components";
 
 // 加速度を取得する関数コンポーネントを定義する
@@ -62,6 +63,14 @@ const MotionRec = () => {
       {/* <button onClick={handleDeviceMotion}>refresh</button> */}
       <p>out1:{outData}</p>
       <button onClick={handleClick}>{button ? "停止" : "開始"}</button>
+
+      <LineChart width={400} height={400} data={data}>
+          <XAxis dataKey="msec" name="msec" />
+          <YAxis />
+          <Line type="monotone" dataKey="x" stroke="#8884d8" dot={false} />
+      </LineChart>
+
+
     </div>
   );
 };
