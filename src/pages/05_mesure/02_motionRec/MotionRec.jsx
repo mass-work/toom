@@ -16,15 +16,11 @@ const MotionRec = () => {
   useEffect(() => {
     const handleDeviceMotion = (event) => {     // イベントハンドラを定義する
       const { x, y, z } = event.acceleration;   // イベントオブジェクトから加速度を取得する
-      // const msec = Math.round(performance.now() * timeDP) / timeDP / 1000;
       setData((prevData) => {                   // データに加速度を追加する
         if (prevData.length >= 1024) { prevData.shift() } // データが1024点に達したら、先頭の要素を削除する
         // 時間軸を0スタートとする処理
         const msec = Math.round(performance.now() * timeDP) / timeDP / 1000;
         const diff = prevData.length > 0 ? Math.round((msec - prevData[0].msec) * timeDP) / timeDP : 0;
-        // const newData = prevData.map((d) => ({ ...d, msec: Math.round((d.msec - prevData[0].msec) * timeDP) / timeDP }));
-        // return [...newData, { msec, diff, x: Math.round(x * aDP) / aDP, y: Math.round(y * aDP) / aDP, z: Math.round(z * aDP) / aDP }];
-        // return [...prevData, {msec, x: Math.round(x * aDP) / aDP, y: Math.round(y * aDP) / aDP, z: Math.round(z * aDP) / aDP}];
         return [...prevData, {msec, diff, x: Math.round(x * aDP) / aDP, y: Math.round(y * aDP) / aDP, z: Math.round(z * aDP) / aDP}];
       });
     };
@@ -38,13 +34,10 @@ const MotionRec = () => {
           window.addEventListener("devicemotion", handleDeviceMotion, { frequency: 10 });
         }
       }).catch( function( e ){console.log( e )})
-      
       // 5秒後にボタンをfalseに変更する
       timeoutId = setTimeout(() => {
         setButton(false);
       }, measurementTime);
-
-
     } else {
       // ボタンがfalseなら、イベントリスナーを解除する
       window.removeEventListener("devicemotion", handleDeviceMotion);
@@ -57,24 +50,19 @@ const MotionRec = () => {
       clearTimeout(timeoutId);
     };
   }, [button]); // 依存配列にボタンの状態を入れる
-  
   // ボタンをクリックしたときのイベントハンドラを定義する
   const handleClick = () => {
     // setButton関数でボタンの状態を反転する
     setData([]);
     setButton((prevButton) => !prevButton);
   };
-
   const refreshData = () => {
     setOutData(JSON.stringify(data))
   }
-
   // JSXで画面に表示する内容を返す
   return (
     <div>
-      {/* <p>加速度のデータ: {JSON.stringify(data)}</p> */}
       <button onClick={refreshData}>refresh</button>
-      {/* <button onClick={handleDeviceMotion}>refresh</button> */}
       <p>out1:{outData}</p>
       <button onClick={handleClick}>{button ? "停止" : "開始"}</button>
 

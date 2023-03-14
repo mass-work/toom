@@ -9,6 +9,7 @@ import WavesIcon from '@mui/icons-material/Waves';
 import Nut from './pages/02_elements/02_Nut/Nut';
 import Fft from './pages/05_mesure/01_fft/Fft';
 import MotionRec from './pages/05_mesure/02_motionRec/MotionRec'
+import "fontsource-noto-sans-jp"
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
 export default App;
 
 const StyledApp = styled.div`
+  font-family: 'Noto Sans JP';
   color: rgb(210, 210, 210);
   margin: 0%;
   padding: 0%;
