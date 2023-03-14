@@ -125,7 +125,7 @@ const Fft = () => {
   const [timeWaveData, setTimeWaveData] = useState([])
   // 加速度を取得する
   const getAccelerator = () => {
-    isMobile ? console.log("スマホ") : setTimeWaveData(sinWaveCreate());
+    isMobile ? setTimeWaveData(sinWaveCreate()) : setTimeWaveData(sinWaveCreate());
     console.log(isMobile ? "スマートフォンです。" : "PCです。");
   }
 
