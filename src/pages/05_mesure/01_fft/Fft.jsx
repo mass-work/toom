@@ -209,7 +209,7 @@ const Fft = () => {
     <div>
       <button onClick={getAccelerator}>加速度取得</button>
 
-      { isMobile ?? <MotionRec/>}
+      { isMobile && <MotionRec/>}
     </div>
     </Box>
     <LineChart width={400} height={400} data={timeWaveData}>
@@ -222,7 +222,7 @@ const Fft = () => {
 
     <Box sx={{ minWidth: 120 }}>
     <StyledFormControl>
-        <InputLabel id="window-select-label">窓関数</InputLabel>
+        <InputLabel id="window-select-label"></InputLabel>
         <StyledSelect labelId="window-select-label" id="window-select" value={window} label="window" onChange={windowHandleChange}>
         <MenuItem value={"rectangular"}>矩形</MenuItem>
         <MenuItem value={"hanning"}>ハニング</MenuItem>
