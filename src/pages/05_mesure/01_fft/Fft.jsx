@@ -117,6 +117,7 @@ const fft1 = (f) => {
 
   
 const Fft = () => {
+  const [data, setData] = useState([]);
   const [sp, setSp] = useState('');
   const spHandleChange = (event) => {setSp(event.target.value);};
   const [timer, setTimer] = useState('');
@@ -184,6 +185,9 @@ const Fft = () => {
     // // 逆変換
     // // const f1 = ifft1(F);
     // // const fr1 = f1.map(([r]) => r);
+  useEffect(() => {
+    setTimeWaveData(data)
+  }, [data]);
   return (
   <div>
     測定条件設定
@@ -209,7 +213,7 @@ const Fft = () => {
     <div>
       <button onClick={getAccelerator}>加速度取得</button>
 
-      { isMobile && <MotionRec/>}
+      { isMobile && <MotionRec setData={setData}/>}
     </div>
     </Box>
     <LineChart width={400} height={400} data={timeWaveData}>

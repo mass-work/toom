@@ -4,7 +4,7 @@ import { LineChart, Line, XAxis, YAxis } from 'recharts';
 // import styled from "styled-components";
 
 // 加速度を取得する関数コンポーネントを定義する
-const MotionRec = () => {
+const MotionRec = (props) => {
   const aDP = 100
   const timeDP = 1000
   const measurementTime = 20000
@@ -60,6 +60,8 @@ const MotionRec = () => {
   const refreshData = () => {
     setOutData(JSON.stringify(data))
   }
+
+  props.setData(data)
   // JSXで画面に表示する内容を返す
   return (
     <div>
