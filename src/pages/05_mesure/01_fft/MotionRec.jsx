@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { isMobile } from 'react-device-detect';
-import { LineChart, Line, XAxis, YAxis } from 'recharts';
+
+
 // import styled from "styled-components";
 
 // 加速度を取得する関数コンポーネントを定義する
@@ -8,7 +8,6 @@ const MotionRec = (props) => {
   const aDP = 100
   const timeDP = 1000
   const measurementTime = 20000
-  const [outData, setOutData] = useState([]);
   // useStateフックで加速度のデータを管理する
   const [data, setData] = useState([]); // データの初期値は空の配列
   // useStateフックでボタンの状態を管理する
@@ -57,27 +56,15 @@ const MotionRec = (props) => {
     setData([]);
     setButton((prevButton) => !prevButton);
   };
-  const refreshData = () => {
-    setOutData(JSON.stringify(data))
-  }
 
   props.setData(data)
   // JSXで画面に表示する内容を返す
   return (
     <div>
-      {/* <button onClick={refreshData}>refresh</button>
-      <p>out1:{outData}</p> */}
+
       <button onClick={handleClick}>{ button ? "停止" : "開始"}</button>
 
-      {/* <LineChart width={400} height={400} data={data}>
-          <XAxis dataKey="diff" name="msec" />
-          <YAxis />
-          <Line type="monotone" dataKey="x" stroke="#8884d8" dot={false} />
-          <Line type="monotone" dataKey="y" stroke="#84d8b8" dot={false} />
-          <Line type="monotone" dataKey="z" stroke="#c2d884" dot={false} />
-      </LineChart> */}
-
-    </div>
+     </div>
   );
 };
 

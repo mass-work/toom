@@ -10,6 +10,8 @@ import { isMobile } from 'react-device-detect';
 import MotionRec from './MotionRec'
 
 // テスト用波形作成
+const N = 2 ** 10
+const sinFrq = 5
 const sinWaveCreate = () => {
   let [sinWaveX, sinWaveY, sinWaveZ] = [[], [], []];
   for (let j = 0; j < N; j++) {
@@ -30,9 +32,6 @@ const sinWaveCreate = () => {
   }
   return data
 }
-const N = 2 ** 10
-const sinFrq = 5
-// const getWave = sinWaveCreate();
 
 // 窓関数の計算
 const windowFunc = (windowSize, windowType) => {
@@ -192,31 +191,35 @@ const Fft = () => {
   <div>
     測定条件設定
     <Box sx={{ minWidth: 120 }}>
+      <p>
+        <StyledFormControl>
+          <div>サンプリング点数</div>
+            {/* <InputLabel id="sp-select-label">サンプリング点数</InputLabel> */}
+          <StyledSelect labelId="sp-select-label" id="sp-select" value={sp} label="sp" onChange={spHandleChange}>
+            <MenuItem value={512}>512点</MenuItem>
+            <MenuItem value={1024}>1024点</MenuItem>
+            <MenuItem value={2048}>2048点</MenuItem>
+          </StyledSelect>
+        </StyledFormControl>
+      </p>
     <StyledFormControl>
-        <InputLabel id="sp-select-label">サンプリング点数</InputLabel>
-        <StyledSelect labelId="sp-select-label" id="sp-select" value={sp} label="sp" onChange={spHandleChange}>
-        <MenuItem value={512}>512点</MenuItem>
-        <MenuItem value={1024}>1024点</MenuItem>
-        <MenuItem value={2048}>2048点</MenuItem>
-        </StyledSelect>
-    </StyledFormControl>
-    <StyledFormControl>
-        <InputLabel id="timer-select-label">タイマー(sec)</InputLabel>
-        <StyledSelect labelId="timer-select-label" id="timer-select" value={timer} label="timer" onChange={timerHandleChange}>
+      <div>タイマー</div>
+      {/* <InputLabel id="timer-select-label">タイマー(sec)</InputLabel> */}
+      <StyledSelect labelId="timer-select-label" id="timer-select" value={timer} label="timer" onChange={timerHandleChange}>
         <MenuItem value={0}>0sec</MenuItem>
         <MenuItem value={1}>1sec</MenuItem>
         <MenuItem value={3}>3sec</MenuItem>
         <MenuItem value={5}>5sec</MenuItem>
         <MenuItem value={10}>10sec</MenuItem>
-        </StyledSelect>
+      </StyledSelect>
     </StyledFormControl>
-    <div>
+    
+    <Stylediv>
       <button onClick={getAccelerator}>加速度取得</button>
-
       { isMobile && <MotionRec setData={setData}/>}
-    </div>
+    </Stylediv>
     </Box>
-    <LineChart width={400} height={400} data={timeWaveData}>
+    <LineChart width={350} height={250} data={timeWaveData}>
       <XAxis dataKey="time" name="time" />
       <YAxis />
       <Line type="monotone" dataKey="x" stroke="#8884d8" dot={false} />
@@ -235,7 +238,7 @@ const Fft = () => {
         </StyledSelect>
     </StyledFormControl>
     </Box>
-    <LineChart width={400} height={400} data={windowWave}>
+    <LineChart width={350} height={250} data={windowWave}>
       <XAxis dataKey="time" name="time" />
       <YAxis />
       <Line type="monotone" dataKey="window" stroke="#d88484" dot={false} />
@@ -245,7 +248,7 @@ const Fft = () => {
     </LineChart>
 
     <button onClick={fftExe}>FFT(高速フーリエ変換)</button>
-    <LineChart width={400} height={400} data={dataFft}>
+    <LineChart width={350} height={250} data={dataFft}>
         <XAxis dataKey="frq" name="frq" />
         <YAxis />
         <Line type="monotone" dataKey="Xamp" stroke="#8884d8" dot={false} />
@@ -259,10 +262,18 @@ const Fft = () => {
 
 export default Fft
 
-const StyledSelect = styled(Select)`
-  background-color: white;
-`
 const StyledFormControl = styled(FormControl)`
   width: 250px;
-
+  height: 45px;
+  
 `
+const StyledSelect = styled(Select)`
+  background-color: #e9e9e9;
+  width: 100px;
+  height: 30px;
+`
+
+const Stylediv = styled.div`
+  margin-top: 15px;
+`
+
