@@ -8,8 +8,9 @@ import HomeIcon from '@mui/icons-material/Home';
 import WavesIcon from '@mui/icons-material/Waves';
 import Nut from './pages/02_elements/02_Nut/Nut';
 import Fft from './pages/05_mesure/01_fft/Fft';
-import MotionRec from './pages/05_mesure/02_motionRec/MotionRec'
+import MotionRec from './pages/05_mesure/01_fft/MotionRec'
 import "fontsource-noto-sans-jp"
+
 
 function App() {
   return (

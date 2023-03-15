@@ -7,7 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { isMobile } from 'react-device-detect';
-
+import MotionRec from './MotionRec'
 
 // テスト用波形作成
 const sinWaveCreate = () => {
@@ -34,7 +34,6 @@ const N = 2 ** 10
 const sinFrq = 5
 // const getWave = sinWaveCreate();
 
-
 // 窓関数の計算
 const windowFunc = (windowSize, windowType) => {
   const window = [];
@@ -46,19 +45,19 @@ const windowFunc = (windowSize, windowType) => {
       }
       break;
     case 'hanning':
-      corrWindowType = 4
+      corrWindowType = 2 / 0.5
       for (let i = 0; i < windowSize; i++) {
         window.push(0.5 - 0.5 * Math.cos((2 * Math.PI * i) / (windowSize - 1)));
       }
       break;
     case 'hamming':
-      corrWindowType = 4
+      corrWindowType = 2 / 0.54
       for (let i = 0; i < windowSize; i++) {
         window.push(0.54 - 0.46 * Math.cos((2 * Math.PI * i) / (windowSize - 1)));
       }
       break;
     case 'blackman':
-      corrWindowType = 4
+      corrWindowType = 2 / 0.42
       for (let i = 0; i < windowSize; i++) {
         window.push(0.42 - 0.5 * Math.cos((2 * Math.PI * i) / (windowSize - 1)) + 0.08 * Math.cos((4 * Math.PI * i) / (windowSize - 1)));
       }
@@ -150,13 +149,7 @@ const Fft = () => {
     setWindowWave(timeWindowWave)
   }, [timeWaveData, window]);
 
-
   const [dataFft, setDataFft] = useState([]);
-
-  
-  // const nyquistFreq = 2.56
-
-
   // FFT実行
   const fftExe = () => {
     const [frX,frY,frZ] = [[],[],[]];
@@ -167,12 +160,8 @@ const Fft = () => {
 
     // // 振幅を計算する 
     // // 窓関数により値を変える必要がある。
-    const imRealX = FX.map(amp => amp[0])
-    const imRealY = FY.map(amp => amp[0])
-    const imRealZ = FZ.map(amp => amp[0])
-    const imAginaryX = FX.map(amp => amp[1])
-    const imAginaryY = FY.map(amp => amp[1])
-    const imAginaryZ = FZ.map(amp => amp[1])
+    const [imRealX, imRealY, imRealZ] = [FX, FY, FZ].map(f => f.map(amp => amp[0]));
+    const [imAginaryX, imAginaryY, imAginaryZ] = [FX, FY, FZ].map(f => f.map(amp => amp[1]));
     const [ampX,ampY,ampZ] = [[],[],[]]
     for (let i = 0; i < imRealX.length; i++) {
       ampX.push(Math.sqrt(Math.pow(imRealX[i],2)+Math.pow(imAginaryX[i],2))/N*corrWindowType)
@@ -219,6 +208,8 @@ const Fft = () => {
     </StyledFormControl>
     <div>
       <button onClick={getAccelerator}>加速度取得</button>
+
+      { isMobile ?? <MotionRec/>}
     </div>
     </Box>
     <LineChart width={400} height={400} data={timeWaveData}>

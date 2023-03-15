@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { isMobile } from 'react-device-detect';
 import { LineChart, Line, XAxis, YAxis } from 'recharts';
 // import styled from "styled-components";
 
@@ -62,17 +63,17 @@ const MotionRec = () => {
   // JSXで画面に表示する内容を返す
   return (
     <div>
-      <button onClick={refreshData}>refresh</button>
-      <p>out1:{outData}</p>
-      <button onClick={handleClick}>{button ? "停止" : "開始"}</button>
+      {/* <button onClick={refreshData}>refresh</button>
+      <p>out1:{outData}</p> */}
+      <button onClick={handleClick}>{ button ? "停止" : "開始"}</button>
 
-      <LineChart width={400} height={400} data={data}>
+      {/* <LineChart width={400} height={400} data={data}>
           <XAxis dataKey="diff" name="msec" />
           <YAxis />
           <Line type="monotone" dataKey="x" stroke="#8884d8" dot={false} />
           <Line type="monotone" dataKey="y" stroke="#84d8b8" dot={false} />
           <Line type="monotone" dataKey="z" stroke="#c2d884" dot={false} />
-      </LineChart>
+      </LineChart> */}
 
     </div>
   );
