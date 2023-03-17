@@ -17,7 +17,7 @@ const MotionRec = (props) => {
     const handleDeviceMotion = (event) => {     // イベントハンドラを定義する
       const { x, y, z } = event.acceleration;   // イベントオブジェクトから加速度を取得する
       setData((prevData) => {                   // データに加速度を追加する
-        if (prevData.length >= 1024) { prevData.shift() } // データが1024点に達したら、先頭の要素を削除する
+        if (prevData.length >= props.samplingPoints) { prevData.shift() } // データが1024点に達したら、先頭の要素を削除する
         // 時間軸を0スタートとする処理
         const msec = Math.round(performance.now() * timeDP) / timeDP / 1000;
         const diff = prevData.length > 0 ? Math.round((msec - prevData[0].msec) * timeDP) / timeDP : 0;

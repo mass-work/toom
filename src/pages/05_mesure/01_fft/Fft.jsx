@@ -10,115 +10,14 @@ import { isMobile } from 'react-device-detect';
 import MotionRec from './MotionRec'
 
 // テスト用波形作成
-const N = 2 ** 10
+// const N = 2 ** 10
 const sinFrq = 5
-const sinWaveCreate = () => {
-  let [sinWaveX, sinWaveY, sinWaveZ] = [[], [], []];
-  for (let j = 0; j < N; j++) {
-    sinWaveX.push(Math.sin(Math.PI * 2 / (N-1) * j * sinFrq));
-    sinWaveY.push(Math.sin(Math.PI * 2 * 2 / (N-1) * j * sinFrq + Math.PI));
-    sinWaveZ.push(Math.sin(Math.PI * 2 * 4 / (N-1) * j * sinFrq + Math.PI * 1.5));
-  }
-  const data = []
-  for (let i = 0; i < N; i++) {
-      let dataTmp = {};
-      // [{x:*, y:*, z:*}]の連想配列を作る
-      dataTmp.time = i / 1000;
-      dataTmp.x = sinWaveX[i];
-      dataTmp.y = sinWaveY[i];
-      dataTmp.z = sinWaveZ[i];
-      // 連想配列を配列に追加していく
-      data.push(dataTmp);
-  }
-  return data
-}
-
-// 窓関数の計算
-const windowFunc = (windowSize, windowType) => {
-  const window = [];
-  let corrWindowType = 2
-  switch (windowType) {
-    case 'rectangular':
-      for (let i = 0; i < windowSize; i++) {
-        window.push(1);
-      }
-      break;
-    case 'hanning':
-      corrWindowType = 2 / 0.5
-      for (let i = 0; i < windowSize; i++) {
-        window.push(0.5 - 0.5 * Math.cos((2 * Math.PI * i) / (windowSize - 1)));
-      }
-      break;
-    case 'hamming':
-      corrWindowType = 2 / 0.54
-      for (let i = 0; i < windowSize; i++) {
-        window.push(0.54 - 0.46 * Math.cos((2 * Math.PI * i) / (windowSize - 1)));
-      }
-      break;
-    case 'blackman':
-      corrWindowType = 2 / 0.42
-      for (let i = 0; i < windowSize; i++) {
-        window.push(0.42 - 0.5 * Math.cos((2 * Math.PI * i) / (windowSize - 1)) + 0.08 * Math.cos((4 * Math.PI * i) / (windowSize - 1)));
-      }
-      break;
-    default:
-       for (let i = 0; i < windowSize; i++) {
-        window.push(1);
-      }
-  }
-
-  const windowWave = []
-  for (let i = 0; i < windowSize; i++) {
-      let dataTmp = {};
-      // [{x:*, y:*, z:*}]の連想配列を作る
-      dataTmp.time = i;
-      dataTmp.window = window[i];
-      // dataTmp.outWindowWave = window[i] * getWave[i];
-      // 連想配列を配列に追加していく
-      windowWave.push(dataTmp);
-  }
-  return [windowWave, corrWindowType];
-}  
-
-// FFTで使う関数
-const expi = (theta) => {return [Math.cos(theta), Math.sin(theta)]} // 複素数の極座標表示に変換する関数
-const iadd = ([ax, ay], [bx, by]) => {return [ax + bx, ay + by]}    // 2つの複素数を足し算する関数
-const isub = ([ax, ay], [bx, by]) => {return [ax - bx, ay - by]}    // 2つの複素数を引き算する関数
-const imul = ([ax, ay], [bx, by]) => {return [ax * bx - ay * by, ax * by + ay * bx]}  // 2つの複素数を掛け算する関数
-const revBit = (k, n) => {
-  let r = 0;
-  for (let i = 0; i < k; i++) r = (r << 1) | ((n >>> i) & 1);
-  return r;
-};
-const fftin1 = (c, T, N) => {
-  const k = Math.log2(N);
-  const rec = c.map((_, i) => c[revBit(k, i)]);
-  for (let Nh = 1; Nh < N; Nh *= 2) {
-      T /= 2;
-      for (let s = 0; s < N; s += Nh * 2) {
-          for (let i = 0; i < Nh; i++) {
-              const l = rec[s + i], re = imul(rec[s + i + Nh], expi(T * i));
-              [rec[s + i], rec[s + i + Nh]] = [iadd(l, re), isub(l, re)];
-          }
-      }
-  }
-  return rec;
-};
-const fft1 = (f) => {
-  const N = f.length, T = -2 * Math.PI;
-  return fftin1(f, T, N);
-};
-// const ifft1 = (F) => {
-//   const N = F.length, T = 2 * Math.PI;
-//   return fftin1(F, T, N).map(([r, i]) => [r / N, i / N]);
-// };
-
 
   
 const Fft = () => {
   const [data, setData] = useState([]);
-  const [sp, setSp] = useState('');
-  const spHandleChange = (event) => {setSp(event.target.value);};
+  const [samplingPoints, setSamplingPoints] = useState(256);
+  const spHandleChange = (event) => {setSamplingPoints(event.target.value);};
   const [timer, setTimer] = useState('');
   const timerHandleChange = (event) => {setTimer(event.target.value);};
   const [timeWaveData, setTimeWaveData] = useState([])
@@ -164,15 +63,15 @@ const Fft = () => {
     const [imAginaryX, imAginaryY, imAginaryZ] = [FX, FY, FZ].map(f => f.map(amp => amp[1]));
     const [ampX,ampY,ampZ] = [[],[],[]]
     for (let i = 0; i < imRealX.length; i++) {
-      ampX.push(Math.sqrt(Math.pow(imRealX[i],2)+Math.pow(imAginaryX[i],2))/N*corrWindowType)
-      ampY.push(Math.sqrt(Math.pow(imRealY[i],2)+Math.pow(imAginaryY[i],2))/N*corrWindowType)
-      ampZ.push(Math.sqrt(Math.pow(imRealZ[i],2)+Math.pow(imAginaryZ[i],2))/N*corrWindowType)
+      ampX.push(Math.sqrt(Math.pow(imRealX[i],2)+Math.pow(imAginaryX[i],2))/samplingPoints*corrWindowType)
+      ampY.push(Math.sqrt(Math.pow(imRealY[i],2)+Math.pow(imAginaryY[i],2))/samplingPoints*corrWindowType)
+      ampZ.push(Math.sqrt(Math.pow(imRealZ[i],2)+Math.pow(imAginaryZ[i],2))/samplingPoints*corrWindowType)
     }
     const frqData = 100
     const data = []
     for (let k = 0; k < frqData; k++) {
         let dataTmp = {};
-        dataTmp.frq = 1 / 0.001 / N * k
+        dataTmp.frq = 1 / 0.001 / samplingPoints * k
         dataTmp.Xamp = ampX[k]
         dataTmp.Yamp = ampY[k]
         dataTmp.Zamp = ampZ[k]
@@ -187,6 +86,116 @@ const Fft = () => {
   useEffect(() => {
     setTimeWaveData(data)
   }, [data]);
+
+
+  const sinWaveCreate = () => {
+    let [sinWaveX, sinWaveY, sinWaveZ] = [[], [], []];
+    for (let j = 0; j < samplingPoints; j++) {
+      sinWaveX.push(Math.sin(Math.PI * 2 / (samplingPoints-1) * j * sinFrq));
+      sinWaveY.push(Math.sin(Math.PI * 2 * 2 / (samplingPoints-1) * j * sinFrq + Math.PI));
+      sinWaveZ.push(Math.sin(Math.PI * 2 * 4 / (samplingPoints-1) * j * sinFrq + Math.PI * 1.5));
+    }
+    const data = []
+    for (let i = 0; i < samplingPoints; i++) {
+        let dataTmp = {};
+        // [{x:*, y:*, z:*}]の連想配列を作る
+        dataTmp.time = i / 1000;
+        dataTmp.x = sinWaveX[i];
+        dataTmp.y = sinWaveY[i];
+        dataTmp.z = sinWaveZ[i];
+        // 連想配列を配列に追加していく
+        data.push(dataTmp);
+    }
+    return data
+  }
+  
+  // 窓関数の計算
+  const windowFunc = (windowSize, windowType) => {
+    const window = [];
+    let corrWindowType = 2
+    switch (windowType) {
+      case 'rectangular':
+        for (let i = 0; i < windowSize; i++) {
+          window.push(1);
+        }
+        break;
+      case 'hanning':
+        corrWindowType = 2 / 0.5
+        for (let i = 0; i < windowSize; i++) {
+          window.push(0.5 - 0.5 * Math.cos((2 * Math.PI * i) / (windowSize - 1)));
+        }
+        break;
+      case 'hamming':
+        corrWindowType = 2 / 0.54
+        for (let i = 0; i < windowSize; i++) {
+          window.push(0.54 - 0.46 * Math.cos((2 * Math.PI * i) / (windowSize - 1)));
+        }
+        break;
+      case 'blackman':
+        corrWindowType = 2 / 0.42
+        for (let i = 0; i < windowSize; i++) {
+          window.push(0.42 - 0.5 * Math.cos((2 * Math.PI * i) / (windowSize - 1)) + 0.08 * Math.cos((4 * Math.PI * i) / (windowSize - 1)));
+        }
+        break;
+      default:
+         for (let i = 0; i < windowSize; i++) {
+          window.push(1);
+        }
+    }
+  
+    const windowWave = []
+    for (let i = 0; i < windowSize; i++) {
+        let dataTmp = {};
+        // [{x:*, y:*, z:*}]の連想配列を作る
+        dataTmp.time = i;
+        dataTmp.window = window[i];
+        // dataTmp.outWindowWave = window[i] * getWave[i];
+        // 連想配列を配列に追加していく
+        windowWave.push(dataTmp);
+    }
+    return [windowWave, corrWindowType];
+  }  
+  
+  // FFTで使う関数
+  const expi = (theta) => {return [Math.cos(theta), Math.sin(theta)]} // 複素数の極座標表示に変換する関数
+  const iadd = ([ax, ay], [bx, by]) => {return [ax + bx, ay + by]}    // 2つの複素数を足し算する関数
+  const isub = ([ax, ay], [bx, by]) => {return [ax - bx, ay - by]}    // 2つの複素数を引き算する関数
+  const imul = ([ax, ay], [bx, by]) => {return [ax * bx - ay * by, ax * by + ay * bx]}  // 2つの複素数を掛け算する関数
+  const revBit = (k, n) => {
+    let r = 0;
+    for (let i = 0; i < k; i++) r = (r << 1) | ((n >>> i) & 1);
+    return r;
+  };
+  const fftin1 = (c, T, N) => {
+    const k = Math.log2(N);
+    const rec = c.map((_, i) => c[revBit(k, i)]);
+    for (let Nh = 1; Nh < N; Nh *= 2) {
+        T /= 2;
+        for (let s = 0; s < N; s += Nh * 2) {
+            for (let i = 0; i < Nh; i++) {
+                const l = rec[s + i], re = imul(rec[s + i + Nh], expi(T * i));
+                [rec[s + i], rec[s + i + Nh]] = [iadd(l, re), isub(l, re)];
+            }
+        }
+    }
+    return rec;
+  };
+  const fft1 = (f) => {
+    const N = f.length, T = -2 * Math.PI;
+    return fftin1(f, T, N);
+  };
+  // const ifft1 = (F) => {
+  //   const N = F.length, T = 2 * Math.PI;
+  //   return fftin1(F, T, N).map(([r, i]) => [r / N, i / N]);
+  // };
+  
+  
+
+
+
+
+
+
   return (
   <div>
     測定条件設定
@@ -195,7 +204,8 @@ const Fft = () => {
         <StyledFormControl>
           <div>サンプリング点数</div>
             {/* <InputLabel id="sp-select-label">サンプリング点数</InputLabel> */}
-          <StyledSelect labelId="sp-select-label" id="sp-select" value={sp} label="sp" onChange={spHandleChange}>
+          <StyledSelect labelId="sp-select-label" id="sp-select" value={samplingPoints} label="sp" onChange={spHandleChange}>
+            <MenuItem value={256}>256点</MenuItem>
             <MenuItem value={512}>512点</MenuItem>
             <MenuItem value={1024}>1024点</MenuItem>
             <MenuItem value={2048}>2048点</MenuItem>
@@ -216,7 +226,7 @@ const Fft = () => {
     
     <Stylediv>
       <button onClick={getAccelerator}>加速度取得</button>
-      { isMobile && <MotionRec setData={setData}/>}
+      { isMobile && <MotionRec setData={setData} samplingPoints={samplingPoints}/>}
     </Stylediv>
     </Box>
     <LineChart width={350} height={250} data={timeWaveData}>
