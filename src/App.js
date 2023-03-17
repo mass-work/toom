@@ -16,11 +16,10 @@ function App() {
   return (
     <StyledApp>
       <StyledHeader>
-        TooM -Toolbox for Manufacturing-
-        <Link to={`/toom/`}><HomeIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
-        <Link to={`/toom/mesure/fft/`}><WavesIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
-        <Link to={`/toom/mesure/motionrec/`}><WavesIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
+        <HeaderTitle>TooM</HeaderTitle>
+        <HeaderSubTitle>-ものづくりのためのツールボックス-</HeaderSubTitle>
       </StyledHeader>
+      <StyledHeaderUnder></StyledHeaderUnder>
         <Routes>
           <Route path="/toom/" element={<Home />} />
           <Route path="/toom/beamcalc/" element={<BeamCalc />} />
@@ -29,7 +28,13 @@ function App() {
           <Route path="/toom/mesure/fft/" element={<Fft />} />
           <Route path="/toom/mesure/motionrec/" element={<MotionRec />} />
         </Routes>
-      <StyledFooter>footer</StyledFooter>
+      <StyledFooter>
+        footer
+        <Link to={`/toom/`}><HomeIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
+        <Link to={`/toom/mesure/fft/`}><WavesIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
+        <Link to={`/toom/mesure/motionrec/`}><WavesIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
+
+      </StyledFooter>
     </StyledApp>
   );
 }
@@ -41,21 +46,37 @@ const StyledApp = styled.div`
   color: rgb(210, 210, 210);
   margin: 0%;
   padding: 0%;
-  /* width: 500px;
-  height: 10vh; */
   @media screen and (max-width: 960px) {
     color: rgb(210, 210, 210);
   }
 `;
+const HeaderTitle = styled.h5`
+  display: table-cell;
+  text-align: right;
+`
+const HeaderSubTitle = styled.div`
+  display: table-cell;
+  text-align: left;
+  font-size: 10px;
+`
 const StyledHeader = styled.header`
-  background-color: rgb(60, 60, 60);
-  margin: -10% 0% 0% 0%;
-  padding: 10% 0% 0% 0%;
+  display: table;
+  margin-left: 12%;
+  width: 100%;
+  font-size: 30px;
   @media screen and (max-width: 960px) {
   }
   @media screen and (max-width: 760px) {
   }
 `
+const StyledHeaderUnder = styled.div`
+  padding-top: 2px;
+  margin-left: 7%;
+  margin-right: 7%;
+  background: linear-gradient(to right, #5854a8, #7874c8); 
+`
+
+
 const StyledFooter = styled.footer`
   background-color: rgb(60, 60, 60);
   margin: 0% 0% -100% 0%;

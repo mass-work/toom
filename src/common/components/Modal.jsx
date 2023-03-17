@@ -43,7 +43,7 @@ const StyledModalWindow = styled.div`
   max-width: 1000px;
   min-width: 300px;
   background-color:rgba(60,60,60,1);
-  border-radius: 10px;
+  /* border-radius: 10px; */
   overflow-y: scroll;
   &::-webkit-scrollbar {
   width: 20px;
@@ -53,11 +53,11 @@ const StyledModalWindow = styled.div`
   }
   &::-webkit-scrollbar-track {
   background-color: rgba(60, 60, 60, 0.3);
-  border-radius: 100px;
+  /* border-radius: 100px; */
   }
   &::-webkit-scrollbar-thumb {
   background: rgba(100, 100, 100, 0.5);
-  border-radius: 100px;
+  /* border-radius: 100px; */
   width: 130px;
   }
 `

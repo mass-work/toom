@@ -71,7 +71,7 @@ const FolderBotton = styled.button`
   height: 100%;
 `
 const StyledFolder = styled.div`
-  border-radius: 15px;
+  /* border-radius: 15px; */
   background-color: rgb(40, 40, 40);
   /* background-color: blue; */
   color: rgb(200, 200, 200);
@@ -108,11 +108,11 @@ const FolderGrid = styled.div`
   }
   &::-webkit-scrollbar-track {
   background-color: rgba(80, 80, 80, 0.3);
-  border-radius: 100px;
+  /* border-radius: 100px; */
   }
   &::-webkit-scrollbar-thumb {
   background: rgba(100, 100, 100, 0.5);
-  border-radius: 100px;
+  /* border-radius: 100px; */
   width: 130px;
   }
 `
@@ -122,7 +122,7 @@ const FolderCard = styled.div`
   padding: 0%;
   overflow: hidden;
   aspect-ratio: 5 / 3.4;
-  border-radius: 5px;
+  /* border-radius: 5px; */
 `
 const OverModal = styled(Modal)`
   display: flex;
