@@ -18,35 +18,37 @@ const Fft = () => {
   const [data, setData] = useState([]);
   const [samplingPoints, setSamplingPoints] = useState(256);
   const spHandleChange = (event) => {setSamplingPoints(event.target.value);};
-  const [timer, setTimer] = useState('');
+  const [timer, setTimer] = useState(0);
   const timerHandleChange = (event) => {setTimer(event.target.value);};
   const [timeWaveData, setTimeWaveData] = useState([])
   // 加速度を取得する
   const getAccelerator = () => {
-    isMobile ? setTimeWaveData(sinWaveCreate()) : setTimeWaveData(sinWaveCreate());
-    console.log(isMobile ? "スマートフォンです。" : "PCです。");
+    // isMobile ? setTimeWaveData(sinWaveCreate()) : setTimeWaveData(sinWaveCreate());
+    setTimeWaveData(sinWaveCreate());
+    console.log("スマートフォンです。");
   }
 
-  const [window, setWindow] = useState('rectangular');
-  const windowHandleChange = (event) => {setWindow(event.target.value);};
-  const [windowWave, setWindowWave] = useState();
+  const [windowFunc, setWindowFunc] = useState('rectangular');
+  const windowHandleChange = (event) => {setWindowFunc(event.target.value);};
+  // const [windowWave, setWindowWave] = useState();
+  const [windowWave, setWindowWave] = useState([]);
   const [corrWindowType, setCorrWindowType] = useState();
   // 窓関数の実行
   useEffect(() => {
-    const [windowWave, corrWindowType] = windowFunc(timeWaveData.length, window)
+    const [windowWave, corrWindowType] = windowFuncCalc(timeWaveData.length, windowFunc)
     setCorrWindowType(corrWindowType)
     const timeWindowWave = []
     for (let i = 0; i < windowWave.length; i++) {
       let data = {};
       data.time = [i]/1000
-      data.window = windowWave[i].window
-      data.x = timeWaveData[i].x * windowWave[i].window
-      data.y = timeWaveData[i].y * windowWave[i].window
-      data.z = timeWaveData[i].z * windowWave[i].window
+      data.windowFunc = windowWave[i].windowFunc
+      data.x = timeWaveData[i].x * windowWave[i].windowFunc
+      data.y = timeWaveData[i].y * windowWave[i].windowFunc
+      data.z = timeWaveData[i].z * windowWave[i].windowFunc
       timeWindowWave.push(data);
     }
     setWindowWave(timeWindowWave)
-  }, [timeWaveData, window]);
+  }, [timeWaveData, windowFunc]);
 
   const [dataFft, setDataFft] = useState([]);
   // FFT実行
@@ -110,36 +112,36 @@ const Fft = () => {
   }
   
   // 窓関数の計算
-  const windowFunc = (windowSize, windowType) => {
-    const window = [];
+  const windowFuncCalc = (windowSize, windowType) => {
+    const windowFunc = [];
     let corrWindowType = 2
     switch (windowType) {
       case 'rectangular':
         for (let i = 0; i < windowSize; i++) {
-          window.push(1);
+          windowFunc.push(1);
         }
         break;
       case 'hanning':
         corrWindowType = 2 / 0.5
         for (let i = 0; i < windowSize; i++) {
-          window.push(0.5 - 0.5 * Math.cos((2 * Math.PI * i) / (windowSize - 1)));
+          windowFunc.push(0.5 - 0.5 * Math.cos((2 * Math.PI * i) / (windowSize - 1)));
         }
         break;
       case 'hamming':
         corrWindowType = 2 / 0.54
         for (let i = 0; i < windowSize; i++) {
-          window.push(0.54 - 0.46 * Math.cos((2 * Math.PI * i) / (windowSize - 1)));
+          windowFunc.push(0.54 - 0.46 * Math.cos((2 * Math.PI * i) / (windowSize - 1)));
         }
         break;
       case 'blackman':
         corrWindowType = 2 / 0.42
         for (let i = 0; i < windowSize; i++) {
-          window.push(0.42 - 0.5 * Math.cos((2 * Math.PI * i) / (windowSize - 1)) + 0.08 * Math.cos((4 * Math.PI * i) / (windowSize - 1)));
+          windowFunc.push(0.42 - 0.5 * Math.cos((2 * Math.PI * i) / (windowSize - 1)) + 0.08 * Math.cos((4 * Math.PI * i) / (windowSize - 1)));
         }
         break;
       default:
          for (let i = 0; i < windowSize; i++) {
-          window.push(1);
+          windowFunc.push(1);
         }
     }
   
@@ -148,8 +150,7 @@ const Fft = () => {
         let dataTmp = {};
         // [{x:*, y:*, z:*}]の連想配列を作る
         dataTmp.time = i;
-        dataTmp.window = window[i];
-        // dataTmp.outWindowWave = window[i] * getWave[i];
+        dataTmp.windowFunc = windowFunc[i];
         // 連想配列を配列に追加していく
         windowWave.push(dataTmp);
     }
@@ -240,7 +241,7 @@ const Fft = () => {
     <Box sx={{ minWidth: 120 }}>
     <StyledFormControl>
         <InputLabel id="window-select-label"></InputLabel>
-        <StyledSelect labelId="window-select-label" id="window-select" value={window} label="window" onChange={windowHandleChange}>
+        <StyledSelect labelId="window-select-label" id="window-select" value={windowFunc} label="window" onChange={windowHandleChange}>
         <MenuItem value={"rectangular"}>矩形</MenuItem>
         <MenuItem value={"hanning"}>ハニング</MenuItem>
         <MenuItem value={"hamming"}>ハミング</MenuItem>
@@ -251,7 +252,7 @@ const Fft = () => {
     <LineChart width={350} height={250} data={windowWave}>
       <XAxis dataKey="time" name="time" />
       <YAxis />
-      <Line type="monotone" dataKey="window" stroke="#d88484" dot={false} />
+      <Line type="monotone" dataKey="windowFunc" stroke="#d88484" dot={false} />
       <Line type="monotone" dataKey="x" stroke="#8884d8" dot={false} />
       <Line type="monotone" dataKey="y" stroke="#84d8b8" dot={false} />
       <Line type="monotone" dataKey="z" stroke="#c2d884" dot={false} />
