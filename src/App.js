@@ -71,8 +71,8 @@ const StyledHeader = styled.header`
 `
 const StyledHeaderUnder = styled.div`
   padding-top: 2px;
-  margin-left: 7%;
-  margin-right: 7%;
+  margin-left: 5%;
+  margin-right: 5%;
   background: linear-gradient(to right, #5854a8, #7874c8); 
 `
 
