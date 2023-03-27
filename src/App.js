@@ -8,7 +8,6 @@ import HomeIcon from '@mui/icons-material/Home';
 import WavesIcon from '@mui/icons-material/Waves';
 import Nut from './pages/02_elements/02_Nut/Nut';
 import Fft from './pages/05_mesure/01_fft/Fft';
-import MotionRec from './pages/05_mesure/01_fft/MotionRec'
 import "fontsource-noto-sans-jp"
 
 
@@ -26,14 +25,11 @@ function App() {
 
           <Route path="/toom/elements/nut/" element={<Nut />} />
           <Route path="/toom/mesure/fft/" element={<Fft />} />
-          <Route path="/toom/mesure/motionrec/" element={<MotionRec />} />
         </Routes>
       <StyledFooter>
         footer
         <Link to={`/toom/`}><HomeIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
         <Link to={`/toom/mesure/fft/`}><WavesIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
-        <Link to={`/toom/mesure/motionrec/`}><WavesIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
-
       </StyledFooter>
     </StyledApp>
   );

@@ -20,8 +20,10 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.5.0",
     "react-scripts": "5.0.1",
+    "react-three-fiber": "^6.0.13",
     "recharts": "^2.2.0",
     "styled-components": "^5.3.6",
+    "three": "^0.150.1",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
