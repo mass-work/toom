@@ -1,29 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Canvas, useLoader } from 'react-three-fiber'
 import NutTable from './NutTable';
-// import { PerspectiveCamera } from 'three'; // 追加
-import { STLLoader } from 'three/examples/jsm/loaders/STLLoader';
-
-
+import ModelViewer from './ModelViewer';
 
 function Nut() {
-  const geometry = useLoader(STLLoader, "./Nut.stl");
   return (
-    <AppContainer>
-      <Canvas>
-        <mesh geometry={geometry}>
-          <meshBasicMaterial color={0xffffff} />
-        </mesh>
-      </Canvas>
-      <NutTable />
-    </AppContainer>
-  );
+    <div>
+      <ModelContainer>
+        <ModelViewer />
+      </ModelContainer>
+      <TableContainer>
+        <NutTable />
+      </TableContainer>
+    </div>
+);
 }
 
 export default Nut;
 
-const AppContainer = styled.div`
-/* background-color: white; */
-  padding: 5% 5%;
+const ModelContainer = styled.div`
+  /* background-color: white; */
+  padding: 2% 5% 0% 5%;
+  height: 80vh;
+  width: 80vw;
+`;
+const TableContainer = styled.div`
+/* background-color: #d2e67c; */
+padding: 2% 5% 2% 5%;
 `;
