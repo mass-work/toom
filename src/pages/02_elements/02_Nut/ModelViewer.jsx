@@ -21,7 +21,7 @@ function ModelViewer() {
       0.1,
       1000
     );
-    camera.position.set(100, 140, 140); // カメラの位置
+    camera.position.set(150, 210, 210); // カメラの位置
     camera.lookAt(0, 0, 0); // カメラの注視点
 
     // 光源の作成
