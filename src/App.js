@@ -15,7 +15,7 @@ function App() {
   return (
     <StyledApp>
       <StyledHeader>
-        <HeaderTitle>TooM</HeaderTitle>
+        <HeaderLink to={`/toom/`}>TooM</HeaderLink>
         <HeaderSubTitle>-ものづくりのためのツールボックス-</HeaderSubTitle>
       </StyledHeader>
       <StyledHeaderUnder></StyledHeaderUnder>
@@ -45,26 +45,38 @@ const StyledApp = styled.div`
   @media screen and (max-width: 960px) {
     color: rgb(210, 210, 210);
   }
-`;
-const HeaderTitle = styled.h5`
-  display: table-cell;
-  text-align: right;
-`
-const HeaderSubTitle = styled.div`
-  display: table-cell;
-  text-align: left;
-  font-size: 10px;
 `
 const StyledHeader = styled.header`
-  display: table;
-  margin-left: 12%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
   font-size: 30px;
+  /* background: #985918; */
   @media screen and (max-width: 960px) {
   }
   @media screen and (max-width: 760px) {
   }
-`
+`;
+
+const HeaderLink = styled(Link)`
+  color: rgb(210, 210, 210);
+  text-decoration: none;
+  font-size: 25px;
+  font-weight: bold;
+  /* background: #9859a8; */
+  flex: 1;
+  text-align: right;
+`;
+
+const HeaderSubTitle = styled.div`
+  text-align: left;
+  font-size: 10px;
+  padding-left: 5px;
+  padding-top: 15px;
+  flex: 1;
+`;
+
 const StyledHeaderUnder = styled.div`
   padding-top: 2px;
   margin-left: 5%;

@@ -23,6 +23,8 @@ function createData(size, outerDiameter, thickness, pitch, height) {
 
 function TableComponent() {
   const [selectedRows, setSelectedRows] = useState([]);
+  const [copySucceeded, setCopySucceeded] = useState(false);
+
   const handleCheckboxChange = (event, row) => {
     if (event.target.checked) {
       setSelectedRows([...selectedRows, row]);
@@ -30,12 +32,24 @@ function TableComponent() {
       setSelectedRows(selectedRows.filter(selectedRow => selectedRow.size !== row.size));
     }
   };
+
   const handleCopyClick = () => {
     const columnNames = ['Size', 'Outer Diameter', 'Thickness', 'Pitch', 'Height'];
     const selectedRowData = selectedRows.map(row => `${row.size}\t${row.outerDiameter}\t${row.thickness}\t${row.pitch}\t${row.height}`).join('\n');
     const copiedData = `${columnNames.join('\t')}\n${selectedRowData}`;
-    navigator.clipboard.writeText(copiedData);
+    navigator.clipboard.writeText(copiedData)
+      .then(() => {
+        setCopySucceeded(true);
+        setTimeout(() => {
+          setCopySucceeded(false);
+        }, 1000);
+      })
+      .catch(() => {
+        setCopySucceeded(false);
+      });
   };
+  
+
   return (
     <div>
       <Table>
@@ -65,6 +79,7 @@ function TableComponent() {
         </tbody>
       </Table>
       <Button onClick={handleCopyClick} disabled={selectedRows.length === 0}>Copy</Button>
+      {copySucceeded  ? 'Copy succeeded!' : ''}
     </div>
   );
 }

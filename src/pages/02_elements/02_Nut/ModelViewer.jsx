@@ -37,7 +37,7 @@ function ModelViewer() {
     // 3Dモデルの読み込み
     const loader = new GLTFLoader();
     loader.load(
-      process.env.PUBLIC_URL + "/model.gltf", // モデルファイルのパス
+      process.env.PUBLIC_URL + "/Nut.glb", // モデルファイルのパス
       function (gltf) {
         const model = gltf.scene;
         model.scale.set(20, 20, 20); // モデルのスケールを設定
