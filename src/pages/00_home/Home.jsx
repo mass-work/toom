@@ -3,7 +3,7 @@ import styled from "styled-components";
 import CalcFolder from '../01_calc/00_CalcFolder'
 import MechanicalFolder from '../03_mechanical/00_MechanicalFolder';
 import CadFolder from '../04_cad/00_CadFolder';
-import MesureFolder from '../05_mesure/00_MesureFolder';
+import ToolsFolder from '../05_tools/00_ToolsFolder';
 import MachiningFolder from '../06_machining/00_MachiningFolder';
 // import StandardFolder from '../02_elements/00_StandardFolder'
 import ElementsFolder from '../02_elements/00_ElementsFolder';
@@ -15,7 +15,7 @@ const Home = () => {
       <StyleHomecontents><CalcFolder /></StyleHomecontents>
       <StyleHomecontents><MechanicalFolder /></StyleHomecontents>
       <StyleHomecontents><CadFolder /></StyleHomecontents>
-      <StyleHomecontents><MesureFolder /></StyleHomecontents>
+      <StyleHomecontents><ToolsFolder /></StyleHomecontents>
       <StyleHomecontents><MachiningFolder /></StyleHomecontents>
       <StyleHomecontents><CalcFolder /></StyleHomecontents>
     </StyleHome>

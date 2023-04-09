@@ -5,7 +5,7 @@ import {Grid} from '@mui/material';
 import Modal from '../../common/components/Modal';
 import CardBeamCalc from '../01_calc/01_CardBeamCalc';
 
-const MesureFolder = () => {
+const ToolsFolder = () => {
   const [show, setShow] = useState(false);
   const sw = window.screen.width;
   let division = 6
@@ -47,7 +47,7 @@ const MesureFolder = () => {
     </div>
   )
 }
-export default MesureFolder
+export default ToolsFolder
 
 const StyledCalcFolder = styled.div`
   max-width: 350px;

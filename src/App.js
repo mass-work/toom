@@ -7,7 +7,8 @@ import BeamCalc from './pages/01_calc/01_BeamCalc/BeamCalc'
 import HomeIcon from '@mui/icons-material/Home';
 import WavesIcon from '@mui/icons-material/Waves';
 import Nut from './pages/02_elements/02_Nut/Nut';
-import Fft from './pages/05_mesure/01_fft/Fft';
+import Fft from './pages/05_tools/01_fft/Fft';
+import Test from './pages/05_tools/02_pdfChecker/PdfChecker'
 import "fontsource-noto-sans-jp"
 
 
@@ -22,14 +23,15 @@ function App() {
         <Routes>
           <Route path="/toom/" element={<Home />} />
           <Route path="/toom/beamcalc/" element={<BeamCalc />} />
-
           <Route path="/toom/elements/nut/" element={<Nut />} />
-          <Route path="/toom/mesure/fft/" element={<Fft />} />
+          <Route path="/toom/tools/fft/" element={<Fft />} />
+          <Route path="/toom/tools/pdfcheker" element={<Test />} />
         </Routes>
       <StyledFooter>
         footer
         <Link to={`/toom/`}><HomeIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
-        <Link to={`/toom/mesure/fft/`}><WavesIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
+        <Link to={`/toom/tools/fft/`}><WavesIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
+        <Link to={`/toom/tools/pdfcheker`}><WavesIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
       </StyledFooter>
     </StyledApp>
   );
@@ -83,7 +85,6 @@ const StyledHeaderUnder = styled.div`
   margin-right: 5%;
   background: linear-gradient(to right, #5854a8, #7874c8); 
 `
-
 
 const StyledFooter = styled.footer`
   background-color: rgb(60, 60, 60);
