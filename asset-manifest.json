@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/toom/static/css/main.6588f5cc.css",
-    "main.js": "/toom/static/js/main.566f9c9c.js",
+    "main.js": "/toom/static/js/main.b74248a0.js",
     "static/js/787.9883561f.chunk.js": "/toom/static/js/787.9883561f.chunk.js",
     "static/media/noto-sans-jp-all-400-normal.woff": "/toom/static/media/noto-sans-jp-all-400-normal.b48c45c455ef531f5a34.woff",
     "pdf.worker.js": "/toom/da7e496d571aa47b9d28d4b929a7f7ce.js",
@@ -128,11 +128,11 @@
     "static/media/noto-sans-jp-117-400-normal.woff2": "/toom/static/media/noto-sans-jp-117-400-normal.9047b932c21d74e1f639.woff2",
     "index.html": "/toom/index.html",
     "main.6588f5cc.css.map": "/toom/static/css/main.6588f5cc.css.map",
-    "main.566f9c9c.js.map": "/toom/static/js/main.566f9c9c.js.map",
+    "main.b74248a0.js.map": "/toom/static/js/main.b74248a0.js.map",
     "787.9883561f.chunk.js.map": "/toom/static/js/787.9883561f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6588f5cc.css",
-    "static/js/main.566f9c9c.js"
+    "static/js/main.b74248a0.js"
   ]
 }
