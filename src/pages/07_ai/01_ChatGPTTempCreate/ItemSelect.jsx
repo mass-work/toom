@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 
-const item_list = ["プログラミング(修正)", "プログラミング(作成)", "WEBデザイン", "数学", "質問", "メール", "レポート", "会話"];
+const item_list = ["プログラミング(修正)", "プログラミング(作成)", "WEBデザイン", "リサーチ", "数学", "質問", "メール", "レポート", "会話"];
 
 const ItemSelect = ({ value, onChange }) => {
   return (

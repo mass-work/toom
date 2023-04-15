@@ -1,13 +1,29 @@
 import React from 'react';
 import styled from "styled-components";
-const CopyButton = ({ onClick }) => {
+
+const CopyButton = ({ inputPrompt, summaryText, folderData, setCopyStatus }) => {
+  const handleCopyClick = () => {
+    const textToCopy = [
+      inputPrompt || summaryText,
+      folderData.map((file) => `${file.name}\n${file.content.join('\n')}`)
+    ].join('\n\n');
+    
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      setCopyStatus('copied!');
+      setTimeout(() => setCopyStatus(''), 1500);
+    });
+  };
+
   return (
     <ItemContainer>
-      <Button onClick={onClick}>コピーする</Button>
+      <Button onClick={handleCopyClick}>Copy</Button>
     </ItemContainer>
   );
 };
+
 export default CopyButton;
+
+
 const ItemContainer = styled.div``;
 
 const Button = styled.button`

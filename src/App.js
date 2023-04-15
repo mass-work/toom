@@ -3,12 +3,12 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import Home from './pages/00_home/Home';
-import BeamCalc from './pages/01_calc/01_BeamCalc/BeamCalc'
+// import BeamCalc from './pages/01_calc/01_BeamCalc/BeamCalc'
 import HomeIcon from '@mui/icons-material/Home';
 import WavesIcon from '@mui/icons-material/Waves';
 import Nut from './pages/02_elements/02_Nut/Nut';
-import Fft from './pages/05_tools/01_fft/Fft';
-import Test from './pages/05_tools/02_pdfChecker/PdfChecker'
+// import Fft from './pages/05_tools/01_fft/Fft';
+// import Test from './pages/05_tools/02_pdfChecker/PdfChecker'
 import ChatGPTTempCreate from './pages/07_ai/01_ChatGPTTempCreate/ChatGPTTempCreate';
 import "fontsource-noto-sans-jp"
 
@@ -23,16 +23,16 @@ function App() {
       <StyledHeaderUnder></StyledHeaderUnder>
         <Routes>
           <Route path="/toom/" element={<Home />} />
-          <Route path="/toom/beamcalc/" element={<BeamCalc />} />
+          {/* <Route path="/toom/beamcalc/" element={<BeamCalc />} /> */}
           <Route path="/toom/elements/nut/" element={<Nut />} />
-          <Route path="/toom/tools/fft/" element={<Fft />} />
-          <Route path="/toom/tools/pdfcheker" element={<Test />} />
+          {/* <Route path="/toom/tools/fft/" element={<Fft />} /> */}
+          {/* <Route path="/toom/tools/pdfcheker" element={<Test />} /> */}
           <Route path="/toom/tools/" element={<ChatGPTTempCreate />} />
         </Routes>
       <StyledFooter>
         footer
         <Link to={`/toom/`}><HomeIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
-        <Link to={`/toom/tools/fft/`}><WavesIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
+        {/* <Link to={`/toom/tools/fft/`}><WavesIcon style={{color:"rgb(210, 210, 210)"}}/></Link> */}
         <Link to={`/toom/tools/`}><WavesIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
       </StyledFooter>
     </StyledApp>

@@ -7,21 +7,11 @@ import FolderSelect from './FolderSelect';
 
 const ChatGPTTempCreate = () => {
   const [folderData, setFolderData] = useState([]);
-  const [selectedItem, setSelectedItem] = useState("プログラミング(コード修正)");
+  const [selectedItem, setSelectedItem] = useState("プログラミング(修正)");
   const [summaryText, setSummaryText] = useState("");
   const [inputPrompt, setInputPrompt] = useState("");
-  
-  const handleCopyClick = () => {
-    const textToCopy = [
-      inputPrompt,
-      folderData.map((file) => `${file.name}\n${file.content.join('\n')}`)
-    ].join('\n\n');
-    
-    navigator.clipboard.writeText(textToCopy).then(() => {
-    //   setInputPrompt('');
-    });
-  };
-  
+  const [copyStatus, setCopyStatus] = useState("");
+
   const handleItemSelect = (e) => {
     setSelectedItem(e.target.value);
     setSummaryText("");
@@ -29,7 +19,10 @@ const ChatGPTTempCreate = () => {
 
   return (
     <AppContainer>
-      <Title>プロンプトformatter</Title>
+      <Title>
+        <img src={process.env.PUBLIC_URL + '/formatterIcon.jpg'} alt="icon" />
+        Formatter
+      </Title>
       <FormContainer>
         <FormItemContainer>
             <ItemSelect value={selectedItem} onChange={handleItemSelect} />
@@ -37,7 +30,8 @@ const ChatGPTTempCreate = () => {
                 onChange={(e) => setSummaryText(e.target.value)}
                 selectedItem={selectedItem}
             />
-        <CopyButton onClick={handleCopyClick} />
+        <CopyButton inputPrompt={inputPrompt} summaryText={summaryText} folderData={folderData} setCopyStatus={setCopyStatus} />
+        <CopyStatus>{copyStatus}</CopyStatus>
         <FolderSelect onFolderDataChange={setFolderData} />
         </FormItemContainer>
       </FormContainer>
@@ -46,8 +40,6 @@ const ChatGPTTempCreate = () => {
 };
 
 export default ChatGPTTempCreate;
-
-// 以下、スタイルコンポーネントの定義
 
 const AppContainer = styled.div`
   background-color: rgb(20, 20, 20);
@@ -62,6 +54,14 @@ const Title = styled.h1`
   color: #eee;
   text-align: center;
   margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    margin-left: 0.5rem;
+    height: 3rem;
+    width: 3rem;
+  }
 `;
 
 const FormContainer = styled.div`
@@ -76,3 +76,7 @@ const FormItemContainer = styled.div`
   max-width: 600px;
 `;
 
+const CopyStatus = styled.span`
+  font-size: 1rem;
+  margin-left: 1rem;
+`;
