@@ -1,10 +1,9 @@
 {
   "files": {
-    "main.css": "/toom/static/css/main.6588f5cc.css",
-    "main.js": "/toom/static/js/main.b6797c19.js",
+    "main.css": "/toom/static/css/main.419ce7f6.css",
+    "main.js": "/toom/static/js/main.cd99f46e.js",
     "static/js/787.9883561f.chunk.js": "/toom/static/js/787.9883561f.chunk.js",
     "static/media/noto-sans-jp-all-400-normal.woff": "/toom/static/media/noto-sans-jp-all-400-normal.b48c45c455ef531f5a34.woff",
-    "pdf.worker.js": "/toom/da7e496d571aa47b9d28d4b929a7f7ce.js",
     "static/media/Nut.png": "/toom/static/media/Nut.eb878d003b027e817acd.png",
     "static/media/noto-sans-jp-6-400-normal.woff2": "/toom/static/media/noto-sans-jp-6-400-normal.673b9b145f80d6954597.woff2",
     "static/media/noto-sans-jp-5-400-normal.woff2": "/toom/static/media/noto-sans-jp-5-400-normal.eb27a529c3eaa2070d71.woff2",
@@ -127,12 +126,12 @@
     "static/media/noto-sans-jp-57-400-normal.woff2": "/toom/static/media/noto-sans-jp-57-400-normal.3564137b369c5ca28126.woff2",
     "static/media/noto-sans-jp-117-400-normal.woff2": "/toom/static/media/noto-sans-jp-117-400-normal.9047b932c21d74e1f639.woff2",
     "index.html": "/toom/index.html",
-    "main.6588f5cc.css.map": "/toom/static/css/main.6588f5cc.css.map",
-    "main.b6797c19.js.map": "/toom/static/js/main.b6797c19.js.map",
+    "main.419ce7f6.css.map": "/toom/static/css/main.419ce7f6.css.map",
+    "main.cd99f46e.js.map": "/toom/static/js/main.cd99f46e.js.map",
     "787.9883561f.chunk.js.map": "/toom/static/js/787.9883561f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6588f5cc.css",
-    "static/js/main.b6797c19.js"
+    "static/css/main.419ce7f6.css",
+    "static/js/main.cd99f46e.js"
   ]
 }
