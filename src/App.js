@@ -33,7 +33,7 @@ function App() {
         footer
         <Link to={`/toom/`}><HomeIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
         <Link to={`/toom/tools/fft/`}><WavesIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
-        <Link to={`/toom/tools/pdfcheker`}><WavesIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
+        <Link to={`/toom/tools/`}><WavesIcon style={{color:"rgb(210, 210, 210)"}}/></Link>
       </StyledFooter>
     </StyledApp>
   );
