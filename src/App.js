@@ -9,6 +9,7 @@ import WavesIcon from '@mui/icons-material/Waves';
 import Nut from './pages/02_elements/02_Nut/Nut';
 import Fft from './pages/05_tools/01_fft/Fft';
 import Test from './pages/05_tools/02_pdfChecker/PdfChecker'
+import ChatGPTTempCreate from './pages/07_ai/01_ChatGPTTempCreate/ChatGPTTempCreate';
 import "fontsource-noto-sans-jp"
 
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/toom/elements/nut/" element={<Nut />} />
           <Route path="/toom/tools/fft/" element={<Fft />} />
           <Route path="/toom/tools/pdfcheker" element={<Test />} />
+          <Route path="/toom/tools/" element={<ChatGPTTempCreate />} />
         </Routes>
       <StyledFooter>
         footer
