@@ -23,9 +23,9 @@ function App() {
       <StyledHeaderUnder></StyledHeaderUnder>
         <Routes>
           <Route path="/toom/" element={<Home />} />
-          {/* <Route path="/toom/beamcalc/" element={<BeamCalc />} /> */}
+          <Route path="/toom/beamcalc/" element={<BeamCalc />} />
           <Route path="/toom/elements/nut/" element={<Nut />} />
-          {/* <Route path="/toom/tools/fft/" element={<Fft />} /> */}
+          <Route path="/toom/tools/fft/" element={<Fft />} />
           {/* <Route path="/toom/tools/pdfcheker" element={<Test />} /> */}
           <Route path="/toom/tools/" element={<ChatGPTTempCreate />} />
         </Routes>
